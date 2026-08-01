@@ -12,6 +12,8 @@ public class FirstPersonMovement : MonoBehaviour
     [SerializeField, Range(0.2f, 1f)] private float crouchMultiplier = 0.3f;
     [SerializeField, Min(0f)] private float crouchTransitionSpeed = 3f;
 
+    [SerializeField] private float gravity = 10f;
+
     private CharacterController controller;
 
     private PlayerInput playerInput;
@@ -62,11 +64,23 @@ public class FirstPersonMovement : MonoBehaviour
 
         Vector2 moveInput = moveAction.ReadValue<Vector2>();
 
+        ApplyGravity();
+
         Move(moveInput);
 
         UpdateCrouch(
             crouchAction.IsPressed()
         );
+    }
+
+    private void ApplyGravity()
+    {
+        if (controller.isGrounded && verticalSpeed < 0f)
+        {
+            verticalSpeed = -2f;
+        }
+
+        verticalSpeed -= gravity * Time.deltaTime;
     }
 
     private void Move(Vector2 input)

@@ -67,7 +67,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -154,6 +154,7 @@ MonoBehaviour:
   sensitivity: 0.15
   minPitch: -80
   maxPitch: 80
+  eyeHeight: 1.8
 --- !u!114 &1234954241928184608
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,4 +282,5 @@ MonoBehaviour:
   walkSpeed: 3
   crouchMultiplier: 0.3
   crouchTransitionSpeed: 3
+  gravity: 10
   playerCamera: {fileID: 3987785648488094766}
