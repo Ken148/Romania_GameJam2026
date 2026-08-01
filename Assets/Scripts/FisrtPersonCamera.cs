@@ -7,13 +7,15 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] float minPitch = -80f;
     [SerializeField] float maxPitch = 80f;
 
+    [SerializeField] private float eyeHeight = 1.8f;
+
     float pitch;
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        transform.localPosition = new Vector3(0f, 0.8f, 0f);
+        transform.localPosition = new Vector3(0f, eyeHeight, 0f);
     }
 
     void Update()
