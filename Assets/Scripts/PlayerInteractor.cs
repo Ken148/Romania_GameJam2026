@@ -8,6 +8,7 @@ public class PlayerInteractor : MonoBehaviour
     
     private PlayerInput playerInput;
     private InputAction interactAction;
+    private InputAction dropAction;
 
     private EquipmentManager equipmentManager;
 
@@ -24,6 +25,7 @@ public class PlayerInteractor : MonoBehaviour
 
         
         interactAction = playerInput.actions["Interact"];
+        dropAction = playerInput.actions["Drop"];
 
     }
 
@@ -47,6 +49,9 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (interactAction.WasPressedThisFrame())
             Interact();
+
+        if (dropAction.WasPressedThisFrame())
+            equipmentManager.Drop();
         
     }
 
