@@ -51,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CameraConstant: 0.004
+    - _CameraConstant: 0.006
     - _OutlineWidth: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0

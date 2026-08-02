@@ -93,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: ca077f83bd018409995f141132cd025c, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: b814be7f515fd4c1eb8b59a15e62d021, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: c5ab8bedb24124622a4db40967c5de91, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -293,7 +293,7 @@ GameObject:
   - component: {fileID: 581009123}
   - component: {fileID: 581009122}
   - component: {fileID: 581009121}
-  - component: {fileID: 581009120}
+  - component: {fileID: 581009124}
   m_Layer: 0
   m_Name: TableLamp
   m_TagString: Untagged
@@ -301,31 +301,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &581009120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 581009119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d8a9cc9a5adc43ecb208d07e573bad1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FlickeringLight
-  targetLight: {fileID: 0}
-  normalIntensity: 0.5
-  minTimeBetweenFlickerBursts: 0.5
-  maxTimeBetweenFlickerBursts: 3
-  minFlickersPerBurst: 1
-  maxFlickersPerBurst: 3
-  minOffDuration: 0.2
-  maxOffDuration: 0.4
-  minSpikeDuration: 0.03
-  maxSpikeDuration: 0.15
-  flickerSpikeIntensity: 2
-  chanceOfExtendedDarkness: 0.2
-  extendedDarknessDuration: 1.5
 --- !u!114 &581009121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +337,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581009119}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 13
   m_Type: 2
   m_Color: {r: 1, g: 0.8235294, b: 0.7647059, a: 1}
@@ -435,6 +410,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &581009124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581009119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422787e719b13440eba575d0c7dfab4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GentleLightPulse
+  targetLight: {fileID: 0}
+  baseIntensity: 1.2
+  pulseAmount: 0.1
+  pulseSpeed: 1.5
 --- !u!1 &704090877
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +648,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 807414785}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 13
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1436,7 +1427,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1640216129}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 13
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
@@ -1640,7 +1631,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1929209071}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 13
   m_Type: 3
   m_Color: {r: 0.9411765, g: 0.9607843, b: 1, a: 1}
