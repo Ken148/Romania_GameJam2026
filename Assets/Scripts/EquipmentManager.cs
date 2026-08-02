@@ -4,6 +4,8 @@ public class EquipmentManager : MonoBehaviour
 {
 
     [SerializeField] private Transform rightHandSocket;
+    [SerializeField] private Transform dropSocket;
+
     private GameObject equippedToolObject;
     private ITool currentTool;
     public ITool CurrentTool => currentTool;
@@ -36,7 +38,7 @@ public class EquipmentManager : MonoBehaviour
         GameObject heldPrefab = pickup.HeldPrefab;
         
         Debug.Log($"Held prefab: {heldPrefab}", this);
-        Unequip();
+        Drop();
         equippedToolObject = Instantiate(heldPrefab);
         equippedToolObject.transform.SetParent(rightHandSocket, false);
         ITool tool = equippedToolObject.GetComponent<ITool>();
@@ -57,7 +59,26 @@ public class EquipmentManager : MonoBehaviour
         Destroy(equippedToolObject);
         equippedToolObject = null;
         currentTool = null;
-        
-        // use free physics to do world pickup
+    }
+
+    public void Drop()
+    {
+        if (currentTool == null)
+            return;
+
+        CharacterController controller = GetComponent<CharacterController>();
+
+        GameObject dropped = Instantiate(
+            currentTool.PickupPrefab,
+            dropSocket.position,
+            Quaternion.identity
+        );
+
+        Physics.IgnoreCollision(
+            dropped.GetComponent<Collider>(),
+            controller
+        );
+
+        Unequip();
     }
 }

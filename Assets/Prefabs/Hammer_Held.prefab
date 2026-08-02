@@ -127,3 +127,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hammer
   heldPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 6782543342938608506, guid: e2de323ef2f0e4ec39b50dc730602c41, type: 3}

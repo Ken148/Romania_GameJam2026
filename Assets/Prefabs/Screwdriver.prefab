@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7067594851204761622}
   - component: {fileID: 576220807218420166}
   - component: {fileID: 7703927682982948864}
+  - component: {fileID: -6903779960905257620}
   m_Layer: 0
   m_Name: Screwdriver
   m_TagString: Untagged
@@ -130,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Screwdriver
   heldPrefab: {fileID: 3097444893813979543, guid: 31a52ab772369a32f967fb315a0bba26, type: 3}
+  pickupPrefab: {fileID: 0}
 --- !u!65 &7703927682982948864
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -151,3 +153,30 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.13555884, y: 0.120345145, z: 0.57046694}
   m_Center: {x: 0.009742175, y: 0.01798089, z: 0.1121097}
+--- !u!54 &-6903779960905257620
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205352935815915705}
+  serializedVersion: 5
+  m_Mass: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1

@@ -106,3 +106,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Screwdriver
   heldPrefab: {fileID: 0}
+  pickupPrefab: {fileID: 1205352935815915705, guid: 6dd5bd716fd4fa2c581cbe34ea3182ba, type: 3}
