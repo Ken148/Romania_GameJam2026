@@ -53,17 +53,20 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Update()
     {
+        
 
         if (dropAction.WasPressedThisFrame())
             equipmentManager.Drop();
 
         if (TryGetHit(out RaycastHit hit))
         {
-            if (interactAction.WasPressedThisFrame())
-                Interact(hit);
-
             if (interactAction.IsPressed())
-                Push(hit);
+            {
+                if (equipmentManager.CurrentTool != null)
+                    equipmentManager.CurrentTool.Use(hit);
+                else if (interactAction.WasPressedThisFrame())
+                    Interact(hit);
+            }
         }
         else Debug.Log("Hit miss");
     }
@@ -97,6 +100,15 @@ public class PlayerInteractor : MonoBehaviour
             direction.Normalize();
 
             pushable.Push(direction);
+        }
+    }
+
+    private void Unscrew(RaycastHit hit)
+    {
+        Screw screw = hit.collider.GetComponentInParent<Screw>();
+        if (screw != null)
+        {
+            screw.Unscrew();
         }
     }
 }
