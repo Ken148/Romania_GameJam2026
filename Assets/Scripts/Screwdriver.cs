@@ -9,7 +9,11 @@ public class Screwdriver : MonoBehaviour, ITool, IPickup
     public GameObject WorldObject => gameObject;
     public GameObject PickupPrefab => pickupPrefab;
 
-    public void Use()
+    public void Use(RaycastHit hit)
     {
+        Screw screw = hit.collider.GetComponentInParent<Screw>();
+
+        if (screw != null)
+            screw.Unscrew();
     }
 }
