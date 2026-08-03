@@ -8,6 +8,9 @@ public class Screwdriver : MonoBehaviour, ITool, IPickup
     public GameObject HeldPrefab => heldPrefab;
     public GameObject WorldObject => gameObject;
     public GameObject PickupPrefab => pickupPrefab;
+    public ToolInput Input => ToolInput.Interact;
+
+
 
     public void Use(RaycastHit hit)
     {
