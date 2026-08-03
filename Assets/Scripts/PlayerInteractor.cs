@@ -11,11 +11,13 @@ public class PlayerInteractor : MonoBehaviour
     private InputAction dropAction;
 
     private EquipmentManager equipmentManager;
+    private FirstPersonMovement movement;
 
     private void Awake()
     {
         playerInput = GetComponentInParent<PlayerInput>();
         equipmentManager = GetComponentInParent<EquipmentManager>();
+        movement = GetComponentInParent<FirstPersonMovement>();
 
         if (!ValidateDependencies())
         {
@@ -26,7 +28,6 @@ public class PlayerInteractor : MonoBehaviour
         
         interactAction = playerInput.actions["Interact"];
         dropAction = playerInput.actions["Drop"];
-
     }
 
     private bool ValidateDependencies()
@@ -41,44 +42,61 @@ public class PlayerInteractor : MonoBehaviour
             Debug.LogError("EquipmentManager not found in parent.", this);
             return false;
         }
+        if (movement == null)
+        {
+            Debug.LogError("FirstPersonMovement not found in parent.", this);
+            return false;
+        }
 
         return true;
     }
 
     private void Update()
     {
-        if (interactAction.WasPressedThisFrame())
-            Interact();
 
         if (dropAction.WasPressedThisFrame())
             equipmentManager.Drop();
-        
+
+        if (TryGetHit(out RaycastHit hit))
+        {
+            if (interactAction.WasPressedThisFrame())
+                Interact(hit);
+
+            if (interactAction.IsPressed())
+                Push(hit);
+        }
+        else Debug.Log("Hit miss");
     }
 
-    private void Interact()
+
+
+    private bool TryGetHit(out RaycastHit hit)
     {
-        Ray ray = new Ray(
+        return Physics.Raycast(
             transform.position,
-            transform.forward
+            transform.forward,
+            out hit,
+            interactDistance
         );
+    }
 
-        Debug.DrawRay(
-            ray.origin,
-            ray.direction * interactDistance,
-            Color.red,
-            1f
-        );
-
-        if (!Physics.Raycast(
-                ray,
-                out RaycastHit hit,
-                interactDistance))
-        {
-            return;
-        }
-
+    private void Interact(RaycastHit hit)
+    {
         IPickup pickup = hit.collider.GetComponentInParent<IPickup>();
         if (pickup != null)
             equipmentManager.Equip(pickup);
+    }
+    
+    private void Push(RaycastHit hit)
+    {
+        Pushable pushable = hit.collider.GetComponentInParent<Pushable>();
+        if (pushable != null)
+        {
+            Vector3 direction = transform.forward;
+            direction.y = 0f;
+            direction.Normalize();
+
+            pushable.Push(direction);
+        }
     }
 }
