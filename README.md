@@ -2,36 +2,42 @@
 
 ## DESIGN DOCUMENT
 
+**Romania 2026 One Week Game Jam**
+
 **By Ken, Anastacia & Arseni**
 
 ---
 
-# Introduction
+# High Concept
 
 ## Game Summary
 
-**Shipwreck** is a first-person story-driven puzzle game created for the **Romania 2026 One Week Game Jam**. Players awaken aboard an industrial transport ship after a violent crash. Water begins flooding the sleeping quarters, forcing them to escape before the ship sinks completely.
+**Shipwreck** is a first-person story-driven puzzle game developed for the **Romania 2026 One Week Game Jam**. Players awaken aboard a heavily damaged industrial cargo ship after a catastrophic crash at sea. As the ship rapidly floods, they must solve environmental puzzles, repair damaged systems, and escape before the vessel sinks beneath the ocean.
 
-As the player explores the damaged vessel, they must solve environmental puzzles, unlock blocked passages, and use tools such as a screwdriver and hammer to progress. Instead of fighting enemies, the greatest threat is **time**, as the water level continuously rises throughout the ship.
+Rather than fighting enemies, players race against **time** as rising water continuously transforms the environment, blocking paths and increasing the tension throughout the adventure.
 
 ---
 
 ## About the Project
 
-This game was developed during the **Romania 2026 One Week Game Jam**, where the team had only **7 days** to design, build, and polish a complete playable experience.
+Shipwreck was developed during the **Romania 2026 One Week Game Jam**, where the team had only **7 days** to design, develop, and polish a complete playable game.
+
+The project focuses on delivering an immersive escape experience through exploration, environmental storytelling, and puzzle solving.
 
 ---
 
 ## Player Experience
 
-Players are challenged to think quickly while exploring a damaged ship filled with blocked corridors, broken machinery, and environmental hazards.
+Players are encouraged to think quickly while navigating a sinking cargo ship filled with damaged machinery, blocked corridors, and flooding compartments.
 
 The game focuses on:
-- Solving environmental puzzles.
-- Escaping before the rising water catches up.
-- Exploring interconnected areas of the ship.
-- Using tools to unlock new paths.
-- Experiencing a tense and immersive atmosphere.
+
+- Solving environmental puzzles
+- Escaping before the rising water catches up
+- Exploring interconnected areas of the ship
+- Using collected tools to unlock new paths
+- Experiencing tension without combat
+- Discovering the story through the environment
 
 ---
 
@@ -45,9 +51,10 @@ The game focuses on:
 ## Genre
 
 - Single Player
-- Story Puzzle
-- Horror
-- Adventure
+- First-Person Puzzle
+- Story Adventure
+- Environmental Horror
+- Exploration
 
 ---
 
@@ -55,67 +62,120 @@ The game focuses on:
 
 ## Gameplay Overview
 
-Players wake up in the flooded sleeping quarters of a crashed industrial transport ship. Their goal is to travel through all three floors while solving puzzles, collecting useful tools, and avoiding the ever-rising water.
+Players begin inside the flooded sleeping quarters of a damaged cargo ship. Their objective is to travel through three increasingly dangerous decks while collecting tools, repairing damaged systems, solving environmental puzzles, and ultimately reaching the bridge before the ship sinks.
 
-Every floor introduces new mechanics and increasingly difficult puzzles that test the player's observation and problem-solving skills.
+Every floor introduces new mechanics and more complex puzzles while the water level continues to rise.
+
+---
+
+## Core Gameplay Loop
+
+1. Explore the environment.
+2. Collect useful tools.
+3. Solve puzzles.
+4. Unlock new areas.
+5. Avoid the rising water.
+6. Reach the bridge.
 
 ---
 
 ## Primary Mechanics
 
-### Tools
+### Exploration
 
-Throughout the game the player uses various tools including:
-
-- Screwdriver
-- Hammer
-- Other
-
-These tools are used to repair machinery, remove obstacles, unlock doors, and solve puzzles.
+Players investigate damaged rooms, search for useful items, and discover alternate routes throughout the ship.
 
 ### Puzzle Solving
 
-Players interact with the environment by repairing damaged systems, opening blocked pathways, activating machinery, and finding items needed to progress.
+Environmental puzzles involve:
+
+- Repairing machinery
+- Restoring power
+- Unlocking doors
+- Activating ship systems
+- Clearing blocked pathways
+
+### Tool System
+
+Players collect tools that unlock new interactions throughout the game.
+
+Current planned tools:
+
+- Screwdriver
+- Hammer
+- Additional maintenance tools (if time permits)
 
 ### Rising Water
 
-The game's main enemy is **time**.
+The game's primary threat is **time**.
 
-Water constantly rises through the ship, forcing players to continue moving forward instead of staying in one place.
+Water continuously rises throughout the ship, forcing players to keep moving forward. Areas that were previously safe gradually become flooded, increasing tension and reducing exploration time.
 
 ---
 
 # Level Design
 
-The ship consists of **three floors**.
+The ship consists of **three interconnected decks**, each introducing new gameplay mechanics and increasing difficulty.
 
-## Floor 1 - Bottom Deck
+---
 
-Contains:
+## Floor 1 – Sleeping Quarters
+
+### Purpose
+
+- Introduce movement
+- Teach interaction mechanics
+- Introduce flooding
+- Basic puzzles
+
+### Areas
+
 - Sleeping Quarters
 - Storage Room
 
-This is where the player begins the game and learns the basic mechanics while escaping the initial flooding.
-
 ---
 
-## Floor 2 - Middle Deck
+## Floor 2 – Engineering Deck
 
-Contains:
+### Purpose
+
+- Introduce advanced puzzles
+- Machinery repair
+- Tool-based progression
+
+### Areas
+
 - Engine Room
-- Maintenance Area
-
-This floor introduces more complex environmental puzzles involving damaged machinery and blocked pathways.
+- Maintenance Workshop
 
 ---
 
-## Floor 3 - Control Room
+## Floor 3 – Bridge
 
-Contains:
-- Ship Bridge
+### Purpose
+
+- Final challenge
+- Complex environmental puzzles
+- Escape sequence
+
+### Areas
+
 - Control Room
+- Captain's Bridge
 
-The player must reach the bridge to attempt to escape before the ship is completely underwater.
+---
+
+# Story
+
+The player awakens alone inside the sleeping quarters of an industrial cargo ship after a violent collision.
+
+Emergency systems are failing.
+
+Water pours into the lower decks.
+
+The crew is nowhere to be found.
+
+With communications destroyed and the ship rapidly sinking, the player must fight against time to reach the bridge and escape before the vessel disappears beneath the ocean.
 
 ---
 
@@ -123,26 +183,72 @@ The player must reach the bridge to attempt to escape before the ship is complet
 
 ## Theme
 
-The game features a realistic industrial cargo ship with dark corridors, damaged machinery, flooded rooms, and emergency lighting to create a tense atmosphere.
+The game features a realistic industrial cargo ship inspired by modern transport vessels.
 
-## Design
+The visual style emphasizes:
 
-The environment tells the story of the ship's crash through broken equipment, debris, flickering lights, leaking pipes, and flooding corridors.
+- Rusted metal
+- Flooded hallways
+- Broken machinery
+- Emergency lighting
+- Flickering electrical systems
+- Water leaks
+- Debris
+
+Environmental storytelling allows players to understand what happened to the ship without relying heavily on dialogue.
+
+---
+
+## Visual Design Goals
+
+The environment should make players feel:
+
+- Isolated
+- Under pressure
+- Curious to explore
+- Constantly aware of the rising danger
 
 ---
 
 # Audio
 
-## Music & Sound effects
+## Music
 
-Music is provided by **Epidemic Sound** and additional royalty-free sources.
+Ambient suspense music gradually increases tension as players progress through the ship.
 
+Music is sourced from **Epidemic Sound** and additional royalty-free libraries.
+
+---
+
+## Sound Effects
+
+The audio design includes:
+
+- Flowing water
+- Creaking metal
+- Steam leaks
+- Machinery
+- Alarm sirens
+- Sparks
+- Door mechanisms
+- Player interactions
+
+---
 
 # Game Experience
 
 ## User Interface
 
-The UI is minimal to keep players immersed in the environment while displaying only essential gameplay information.
+The interface is intentionally minimal to maximize immersion.
+
+Displayed information includes:
+
+- Crosshair
+- Interaction prompts
+- Held tool
+- Optional objectives
+
+No minimap or excessive HUD elements are used.
 
 ---
 
@@ -152,10 +258,33 @@ The UI is minimal to keep players immersed in the environment while displaying o
 |------|--------|
 | **WASD** | Move |
 | **Mouse** | Look Around |
-| **Left Mouse Button** | Interact |
+| **Left Mouse Button** | Use / Interact |
 | **E** | Pick Up Item |
 | **Q** | Drop Item |
 | **Left Shift** | Crouch |
+| **Esc** | Pause |
+
+---
+
+# Design Goals
+
+The primary design goals are to create:
+
+### Tension
+
+The constant rise of the water creates pressure without requiring enemies or combat.
+
+### Exploration
+
+Players are rewarded for carefully searching rooms and observing environmental details.
+
+### Puzzle Satisfaction
+
+Each solved puzzle unlocks meaningful progression and encourages players to think creatively.
+
+### Immersion
+
+Lighting, environmental storytelling, realistic sound design, and minimal UI help immerse players inside the sinking ship.
 
 ---
 
@@ -163,9 +292,9 @@ The UI is minimal to keep players immersed in the environment while displaying o
 
 | Member | Responsibilities |
 |---------|------------------|
-| **Ken** | Map creation, level design, GitHub repository management |
-| **Anastacia** | Gameplay programming and puzzle mechanics |
-| **Arseni** | Lighting, visual effects, environmental polish |
+| **Ken** | Level design, environment creation, GitHub repository management |
+| **Anastacia** | Gameplay programming, puzzle mechanics, interaction systems |
+| **Arseni** | Lighting, post-processing, visual effects, environmental polish |
 
 ---
 
@@ -173,12 +302,11 @@ The UI is minimal to keep players immersed in the environment while displaying o
 
 | Date | Description | Type |
 |------|-------------|------|
-| **31.07.2026** | Brainstormed the game idea, planned the project, and set up the GitHub repository. | Planning |
-| **01.08.2026** | Created the first floor, implemented player movement, and added lighting. | Level Design & Programming |
-| **02.08.2026** | Built the second floor, implemented the pick-up and drop mechanics, and polished the first floor. | Level Design & Programming |
-| **03.08.2026** | *To be completed.* | |
-| **06.08.2026** | *To be completed.* | |
-| **07.08.2026** | *To be completed.* | |
-| **08.08.2026** | *Final polish, bug fixes, and game jam submission.* | Polish |
-
----
+| **31.07.2026** | Brainstormed the game idea, planned the project, created the GitHub repository. | Planning |
+| **01.08.2026** | Built the first floor, implemented player movement, basic interaction, and lighting. | Level Design & Programming |
+| **02.08.2026** | Created the second floor, implemented item pickup/drop mechanics, polished the first floor. | Level Design & Programming |
+| **03.08.2026** | Implement rising water system, tool mechanics, and environmental puzzles. | Gameplay |
+| **04.08.2026** ||
+| **05.08.2026** ||
+| **06.08.2026** ||
+| **07.08.2026** ||
