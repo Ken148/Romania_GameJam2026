@@ -11,6 +11,8 @@ public class FirstPersonMovement : MonoBehaviour
     [Header("Crouch")]
     [SerializeField, Range(0.2f, 1f)] private float crouchMultiplier = 0.3f;
     [SerializeField, Min(0f)] private float crouchTransitionSpeed = 3f;
+    private bool isCrouching;
+    public bool IsCrouching => isCrouching;
 
     [SerializeField] private float gravity = 10f;
 
@@ -68,9 +70,9 @@ public class FirstPersonMovement : MonoBehaviour
 
         Move(moveInput);
 
-        UpdateCrouch(
-            crouchAction.IsPressed()
-        );
+        isCrouching = crouchAction.IsPressed();
+
+        UpdateCrouch(isCrouching);
     }
 
     private void ApplyGravity()
