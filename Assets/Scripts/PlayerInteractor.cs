@@ -9,6 +9,7 @@ public class PlayerInteractor : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction interactAction;
     private InputAction dropAction;
+    private InputAction attackAction;
 
     private EquipmentManager equipmentManager;
     private FirstPersonMovement movement;
@@ -25,9 +26,9 @@ public class PlayerInteractor : MonoBehaviour
             return;
         }
 
-        
         interactAction = playerInput.actions["Interact"];
         dropAction = playerInput.actions["Drop"];
+        attackAction = playerInput.actions["Attack"];
     }
 
     private bool ValidateDependencies()
@@ -53,45 +54,30 @@ public class PlayerInteractor : MonoBehaviour
 
     private void Update()
     {
-        
+        HandleDrop();
 
+        if (!TryGetHit(out RaycastHit hit))
+        {
+            Debug.Log("Hit miss");
+            return;
+        }
+
+        HandleToolUse(hit);
+        HandlePickup(hit);
+        HandlePush(hit);
+    }
+
+    private void HandleDrop()
+    {
         if (dropAction.WasPressedThisFrame())
             equipmentManager.Drop();
-
-        if (TryGetHit(out RaycastHit hit))
-        {
-            if (interactAction.IsPressed())
-            {
-                if (equipmentManager.CurrentTool != null)
-                    equipmentManager.CurrentTool.Use(hit);
-                else if (interactAction.WasPressedThisFrame())
-                    Interact(hit);
-            }
-        }
-        else Debug.Log("Hit miss");
     }
 
-
-
-    private bool TryGetHit(out RaycastHit hit)
+    private void HandlePush(RaycastHit hit)
     {
-        return Physics.Raycast(
-            transform.position,
-            transform.forward,
-            out hit,
-            interactDistance
-        );
-    }
-
-    private void Interact(RaycastHit hit)
-    {
-        IPickup pickup = hit.collider.GetComponentInParent<IPickup>();
-        if (pickup != null)
-            equipmentManager.Equip(pickup);
-    }
-    
-    private void Push(RaycastHit hit)
-    {
+        if (!interactAction.IsPressed())
+            return;
+        
         Pushable pushable = hit.collider.GetComponentInParent<Pushable>();
         if (pushable != null)
         {
@@ -103,12 +89,52 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
-    private void Unscrew(RaycastHit hit)
+
+    private void HandleToolUse(RaycastHit hit)
     {
-        Screw screw = hit.collider.GetComponentInParent<Screw>();
-        if (screw != null)
+        ITool tool = equipmentManager.CurrentTool;
+        if (tool == null)
+            return;
+
+        if (IsToolActivated(tool))
+            tool.Use(hit);
+    }
+
+    private bool IsToolActivated(ITool tool)
+    {
+        switch (tool.Input)
         {
-            screw.Unscrew();
+            case ToolInput.Interact:
+                return interactAction.IsPressed();
+
+            case ToolInput.Attack:
+                return attackAction.WasPressedThisFrame();
+
+            default:
+                return false;
         }
     }
+
+    private void HandlePickup(RaycastHit hit)
+    {
+        if (!interactAction.WasPressedThisFrame())
+            return;
+
+        IPickup pickup = hit.collider.GetComponentInParent<IPickup>();
+        if (pickup != null)
+            equipmentManager.Equip(pickup);
+    }
+
+    private bool TryGetHit(out RaycastHit hit)
+    {
+        return Physics.Raycast(
+            transform.position,
+            transform.forward,
+            out hit,
+            interactDistance
+        );
+    }
+
+    
+    
 }
