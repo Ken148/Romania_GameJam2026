@@ -3,5 +3,5 @@ using UnityEngine;
 public interface ITool
 {
     GameObject PickupPrefab { get; }
-    void Use();
+    void Use(RaycastHit hit);
 }

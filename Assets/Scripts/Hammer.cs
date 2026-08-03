@@ -9,7 +9,7 @@ public class Hammer : MonoBehaviour, ITool, IPickup
     public GameObject WorldObject => gameObject;
     public GameObject PickupPrefab => pickupPrefab;
 
-    public void Use()
+    public void Use(RaycastHit hit)
     {
     }
 }
