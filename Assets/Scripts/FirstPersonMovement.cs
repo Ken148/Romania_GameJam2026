@@ -6,10 +6,10 @@ using UnityEngine.InputSystem;
 public class FirstPersonMovement : MonoBehaviour
 {
     [Header("Walk")]
-    [SerializeField, Min(0f)] private float walkSpeed = 3f;
+    [SerializeField, Min(0f)] private float walkSpeed = 5f;
 
     [Header("Crouch")]
-    [SerializeField, Range(0.2f, 1f)] private float crouchMultiplier = 0.3f;
+    [SerializeField, Range(0.2f, 1f)] private float crouchMultiplier = 0.5f;
     [SerializeField, Min(0f)] private float crouchTransitionSpeed = 3f;
     private bool isCrouching;
     public bool IsCrouching => isCrouching;
@@ -23,13 +23,8 @@ public class FirstPersonMovement : MonoBehaviour
     private InputAction crouchAction;
 
     private float verticalSpeed;
-    private float standingHeight;
+    [SerializeField] private float standingHeight = 2.5f;
 
-    [SerializeField] private Camera playerCamera;
-    private Vector3 standingCenter;
-    private Vector3 standingCameraPosition;
-
-    private Transform cameraTransform;
 
     private void Awake()
     {
@@ -45,19 +40,11 @@ public class FirstPersonMovement : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         crouchAction = playerInput.actions["Crouch"];
 
-        standingHeight = controller.height;
-        standingCenter = controller.center;
-        cameraTransform = playerCamera.transform;
-        standingCameraPosition = cameraTransform.localPosition;
+        controller.height = standingHeight;
     }
 
     private bool ValidateDependencies()
     {
-        if (playerCamera == null)
-        {
-            Debug.LogError("Player Camera is not assigned.", this);
-            return false;
-        }
         return true;
     }
 
@@ -106,19 +93,33 @@ public class FirstPersonMovement : MonoBehaviour
     {
         float scale = crouching ? crouchMultiplier : 1f;
 
-        controller.height = standingHeight * scale;
+        float targetHeight = standingHeight * scale;
 
-        Vector3 center = standingCenter;
-        center.y *= scale;
-        controller.center = center;
-
-        Vector3 cameraPosition = standingCameraPosition;
-        cameraPosition.y *= scale;
-
-        cameraTransform.localPosition = Vector3.MoveTowards(
-            cameraTransform.localPosition,
-            cameraPosition,
+        controller.height = Mathf.MoveTowards(
+            controller.height,
+            targetHeight,
             crouchTransitionSpeed * Time.deltaTime
+        );
+
+        controller.center = new Vector3(
+        controller.center.x,
+        controller.height * 0.5f,
+        controller.center.z
+        );
+    }
+
+    private void OnValidate()
+    {
+        controller = GetComponent<CharacterController>();
+
+        if (controller == null)
+            return;
+
+        controller.height = standingHeight;
+        controller.center = new Vector3(
+            controller.center.x,
+            standingHeight * 0.5f,
+            controller.center.z
         );
     }
 }

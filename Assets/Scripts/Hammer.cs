@@ -13,9 +13,12 @@ public class Hammer : MonoBehaviour, ITool, IPickup
     public void Use(RaycastHit hit)
     {
         Debris debris = hit.collider.GetComponentInParent<Debris>();
+
+        if (debris == null)
+            return;
+
         Debug.Log("Hitting " + debris.gameObject.name);
 
-        if (debris != null)
-            debris.Hit(transform.forward);
+        debris.Hit(transform.forward);
     }
 }
