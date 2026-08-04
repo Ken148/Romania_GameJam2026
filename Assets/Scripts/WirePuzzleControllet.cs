@@ -24,7 +24,6 @@ public class WirePuzzleController : MonoBehaviour
     void OnEnable()
     {
         ResetPuzzle();
-        ShuffleSockets();
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -35,37 +34,24 @@ public class WirePuzzleController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    void ShuffleSockets()
-    {
-        List<int> ids = new List<int>();
-        for (int i = 0; i < leftSockets.Length; i++) ids.Add(i);
-
-        for (int i = 0; i < leftSockets.Length; i++)
-            leftSockets[i].colorId = ids[i];
-
-        List<int> shuffled = new List<int>(ids);
-        for (int i = shuffled.Count - 1; i > 0; i--)
-        {
-            int j = UnityEngine.Random.Range(0, i + 1);
-            (shuffled[i], shuffled[j]) = (shuffled[j], shuffled[i]);
-        }
-
-        for (int i = 0; i < rightSockets.Length; i++)
-            rightSockets[i].colorId = shuffled[i];
-
-        for (int i = 0; i < leftSockets.Length; i++)
-            leftSockets[i].GetComponent<Image>().color = wireColors[leftSockets[i].colorId];
-        for (int i = 0; i < rightSockets.Length; i++)
-            rightSockets[i].GetComponent<Image>().color = wireColors[rightSockets[i].colorId];
-    }
 
     public void ResetPuzzle()
     {
         connectedCount = 0;
         selectedSocket = null;
+
         foreach (Transform child in wiresContainer) Destroy(child.gameObject);
-        foreach (var s in leftSockets) { s.isConnected = false; s.SetHighlight(false); }
-        foreach (var s in rightSockets) { s.isConnected = false; s.SetHighlight(false); }
+
+        foreach (var s in leftSockets)
+        {
+            s.isConnected = false;
+            s.SetHighlight(false);
+        }
+        foreach (var s in rightSockets)
+        {
+            s.isConnected = false;
+            s.SetHighlight(false);
+        }
     }
 
     public void OnSocketClicked(WireSocket socket)
@@ -130,7 +116,13 @@ public class WirePuzzleController : MonoBehaviour
         line.rotation = Quaternion.Euler(0, 0, angle);
 
         Image img = line.GetComponent<Image>();
-        if (img != null) img.color = wireColors[left.colorId];
+        if (img != null && wireColors != null && wireColors.Length > left.colorId)
+            img.color = wireColors[left.colorId];
+    }
+
+    public void TestShowPuzzle()
+    {
+        gameObject.SetActive(true);
     }
 
 
