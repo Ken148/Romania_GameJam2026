@@ -33,7 +33,7 @@ public class FirstPersonMovement : MonoBehaviour
     private float verticalSpeed;
     private Vector3 horizontalVelocity;
 
-
+    private int standCheckMask;
 
     private void Awake()
     {
@@ -50,6 +50,8 @@ public class FirstPersonMovement : MonoBehaviour
         crouchAction = playerInput.actions["Crouch"];
 
         controller.height = standingHeight;
+
+        standCheckMask = LayerMask.GetMask("Default");
     }
 
     private bool ValidateDependencies()
@@ -64,9 +66,8 @@ public class FirstPersonMovement : MonoBehaviour
 
         ApplyGravity();
 
-        Move(moveInput);
-
         isCrouching = crouchAction.IsPressed();
+        Move(moveInput);
 
         UpdateCrouch(isCrouching);
     }
@@ -114,6 +115,10 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void UpdateCrouch(bool crouching)
     {
+        if (!crouching && !HasRoomToStand())
+            return;
+
+
         float scale = crouching ? crouchHeightMultiplier : 1f;
 
         float targetHeight = standingHeight * scale;
@@ -128,6 +133,21 @@ public class FirstPersonMovement : MonoBehaviour
         controller.center.x,
         controller.height * 0.5f,
         controller.center.z
+        );
+    }
+
+    private bool HasRoomToStand()
+    {
+        float radius = controller.radius;
+
+        Vector3 bottom = transform.position + Vector3.up * radius;
+        Vector3 top = transform.position + Vector3.up * (standingHeight - radius);
+
+        return !Physics.CheckCapsule(
+            bottom,
+            top,
+            radius,
+            standCheckMask
         );
     }
 
