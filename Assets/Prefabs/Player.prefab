@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FirstPersonMovement
   walkSpeed: 5
-  crouchMultiplier: 0.5
+  crouchMultiplier: 0.2
   crouchTransitionSpeed: 7
   gravity: 10
   standingHeight: 2.5

@@ -5,16 +5,24 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(PlayerInput))]
 public class FirstPersonMovement : MonoBehaviour
 {
+
+    [Header("Player")]
+    [SerializeField] private float standingHeight = 2.5f;
+
     [Header("Walk")]
     [SerializeField, Min(0f)] private float walkSpeed = 5f;
+    [SerializeField] private float gravity = 10f;
+
+    [SerializeField] private float acceleration = 20f;
+    [SerializeField] private float deceleration = 25f;
 
     [Header("Crouch")]
-    [SerializeField, Range(0.2f, 1f)] private float crouchMultiplier = 0.5f;
+    [SerializeField, Range(0.1f, 1f)] private float crouchHeightMultiplier = 0.5f;
+    [SerializeField] float crouchSpeedMultiplier = 0.4f;
     [SerializeField, Min(0f)] private float crouchTransitionSpeed = 3f;
+
     private bool isCrouching;
     public bool IsCrouching => isCrouching;
-
-    [SerializeField] private float gravity = 10f;
 
     private CharacterController controller;
 
@@ -23,12 +31,8 @@ public class FirstPersonMovement : MonoBehaviour
     private InputAction crouchAction;
 
     private float verticalSpeed;
-    [SerializeField] private float standingHeight = 2.5f;
-
-    [SerializeField] private float acceleration = 20f;
-    [SerializeField] private float deceleration = 25f;
-
     private Vector3 horizontalVelocity;
+
 
 
     private void Awake()
@@ -88,7 +92,9 @@ public class FirstPersonMovement : MonoBehaviour
         Vector3 direction =
             (forward * input.y + right * input.x).normalized;
 
-        Vector3 targetVelocity = direction * walkSpeed;
+        float speed = isCrouching ? walkSpeed * crouchSpeedMultiplier : walkSpeed;
+
+        Vector3 targetVelocity = direction * speed;
 
         float rate = direction.sqrMagnitude > 0f
             ? acceleration
@@ -108,7 +114,7 @@ public class FirstPersonMovement : MonoBehaviour
 
     private void UpdateCrouch(bool crouching)
     {
-        float scale = crouching ? crouchMultiplier : 1f;
+        float scale = crouching ? crouchHeightMultiplier : 1f;
 
         float targetHeight = standingHeight * scale;
 
