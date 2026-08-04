@@ -7,15 +7,34 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] float minPitch = -80f;
     [SerializeField] float maxPitch = 80f;
 
-    [SerializeField] private float eyeHeight = 1.8f;
+    [SerializeField] CharacterController controller;
+    [SerializeField] float eyeOffset = 0.4f;
 
     float pitch;
 
     void Start()
-    {
+    {   
+        controller = GetComponentInParent<CharacterController>();
+
+        if (!ValidateDependencies())
+        {
+            enabled = false;
+            return;
+        }
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        transform.localPosition = new Vector3(0f, eyeHeight, 0f);
+    }
+
+    private bool ValidateDependencies()
+    {
+        if (controller == null)
+        {
+            Debug.LogError("CharacterController is missing.", this);
+            enabled = false;
+            return false;
+        }
+        return true;
     }
 
     void Update()
@@ -48,5 +67,12 @@ public class FirstPersonCamera : MonoBehaviour
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
 
         transform.localRotation = Quaternion.Euler(pitch, 0f, 0f);
+    }
+
+    void LateUpdate()
+    {
+        Vector3 p = transform.localPosition;
+        p.y = controller.center.y + controller.height * 0.5f - eyeOffset;
+        transform.localPosition = p;
     }
 }

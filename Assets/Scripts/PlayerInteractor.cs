@@ -14,6 +14,9 @@ public class PlayerInteractor : MonoBehaviour
     private EquipmentManager equipmentManager;
     private FirstPersonMovement movement;
 
+    [SerializeField] private LayerMask interactMask;
+
+
     private void Awake()
     {
         playerInput = GetComponentInParent<PlayerInput>();
@@ -61,6 +64,8 @@ public class PlayerInteractor : MonoBehaviour
             Debug.Log("Hit miss");
             return;
         }
+
+        Debug.Log(hit.collider.name);
 
         HandleToolUse(hit);
         HandlePickup(hit);
@@ -131,7 +136,8 @@ public class PlayerInteractor : MonoBehaviour
             transform.position,
             transform.forward,
             out hit,
-            interactDistance
+            interactDistance,
+            interactMask
         );
     }
 
