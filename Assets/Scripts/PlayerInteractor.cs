@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Camera))]
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float interactDistance = 1f;
