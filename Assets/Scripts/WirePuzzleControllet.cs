@@ -16,6 +16,8 @@ public class WirePuzzleController : MonoBehaviour
 
     public Action OnPuzzleSolved;
 
+    public MonoBehaviour playerController;
+
     private WireSocket selectedSocket;
     private int connectedCount = 0;
 
@@ -27,12 +29,14 @@ public class WirePuzzleController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        if (playerController != null) playerController.enabled = false;
     }
 
     void OnDisable()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        if (playerController != null) playerController.enabled = true;
     }
 
     public void ResetPuzzle()
