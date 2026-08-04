@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Camera))]
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float interactDistance = 1f;
@@ -15,6 +14,10 @@ public class PlayerInteractor : MonoBehaviour
     private FirstPersonMovement movement;
 
     [SerializeField] private LayerMask interactMask;
+
+    private bool isPushing;
+    public bool IsPushing => isPushing;
+
 
 
     private void Awake()
@@ -80,18 +83,31 @@ public class PlayerInteractor : MonoBehaviour
 
     private void HandlePush(RaycastHit hit)
     {
+        isPushing = false;
+
         if (!interactAction.IsPressed())
             return;
         
         Pushable pushable = hit.collider.GetComponentInParent<Pushable>();
         if (pushable != null)
+
+        isPushing = true;
+
         {
             Vector3 direction = transform.forward;
-            direction.y = 0f;
-            direction.Normalize();
 
-            pushable.Push(direction);
+            pushable.Push(GetCardinalDirection(direction));
         }
+    }
+
+    private Vector3 GetCardinalDirection(Vector3 direction)
+    {
+        direction.y = 0;
+
+        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+            return new Vector3(Mathf.Sign(direction.x), 0, 0);
+
+        return new Vector3(0, 0, Mathf.Sign(direction.z));
     }
 
 

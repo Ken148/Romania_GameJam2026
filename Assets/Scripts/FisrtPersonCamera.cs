@@ -59,6 +59,12 @@ public class FirstPersonCamera : MonoBehaviour
 
         Vector2 mouse = Mouse.current.delta.ReadValue();
 
+        if (float.IsNaN(mouse.x) || float.IsNaN(mouse.y))
+        {
+            Debug.LogWarning("Invalid mouse delta detected, ignoring frame.");
+            return;
+        }
+
         // Turn the entire player left/right
         transform.parent.Rotate(Vector3.up * mouse.x * sensitivity);
 

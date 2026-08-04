@@ -9,10 +9,9 @@ public class Pushable : MonoBehaviour
     private void Awake()
         {
             rb = GetComponent<Rigidbody>();
-            rb.constraints =
-                RigidbodyConstraints.FreezeRotationX |
-                RigidbodyConstraints.FreezeRotationZ;
-                }
+            rb.constraints = RigidbodyConstraints.FreezeRotation;
+        }
+
     public void Push(Vector3 direction)
     {
         Debug.Log("Moving pushable");
