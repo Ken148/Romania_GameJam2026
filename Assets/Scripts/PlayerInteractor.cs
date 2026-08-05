@@ -64,7 +64,7 @@ public class PlayerInteractor : MonoBehaviour
 
         if (!TryGetHit(out RaycastHit hit))
         {
-            Debug.Log("Hit miss");
+            //Debug.Log("Hit miss");
             return;
         }
 
@@ -73,6 +73,7 @@ public class PlayerInteractor : MonoBehaviour
         HandleToolUse(hit);
         HandlePickup(hit);
         HandlePush(hit);
+        HandleOpenDoor(hit);
     }
 
     private void HandleDrop()
@@ -90,13 +91,26 @@ public class PlayerInteractor : MonoBehaviour
         
         Pushable pushable = hit.collider.GetComponentInParent<Pushable>();
         if (pushable != null)
-
-        isPushing = true;
-
         {
+            isPushing = true;
+
             Vector3 direction = transform.forward;
 
             pushable.Push(GetCardinalDirection(direction));
+        }
+
+        
+    }
+
+    private void HandleOpenDoor(RaycastHit hit)
+    {
+        if (!interactAction.IsPressed())
+            return;
+        
+        PadlockedDoor door = hit.collider.GetComponentInParent<PadlockedDoor>();
+        if (door != null)
+        {
+            door.Open();
         }
     }
 
