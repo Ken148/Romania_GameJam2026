@@ -25,6 +25,9 @@ public class WirePuzzleController : MonoBehaviour
 
     public InsulationOverride[] insulationOverrides;
 
+    public GameObject darkenOverlay;
+
+
     private WireSocket selectedSocket;
     private int connectedCount = 0;
 
@@ -39,6 +42,7 @@ public class WirePuzzleController : MonoBehaviour
         if (playerController != null) playerController.enabled = false;
 
         targetWeight = 1f;
+        if (darkenOverlay != null) darkenOverlay.SetActive(true);
     }
 
     void OnDisable()
@@ -49,6 +53,7 @@ public class WirePuzzleController : MonoBehaviour
 
         targetWeight = 0f;
         if (blurVolume != null) blurVolume.weight = 0f;
+        if (darkenOverlay != null) darkenOverlay.SetActive(false);
     }
 
     void Update()
