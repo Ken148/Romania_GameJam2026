@@ -25,7 +25,7 @@ public class PadlockedDoor : MonoBehaviour
 
         if (distance < doorLength)
         {
-            transform.localPosition += Vector3.forward * step;
+            transform.localPosition -= Vector3.forward * step;
             Debug.Log("Opening door");
         }
     }
