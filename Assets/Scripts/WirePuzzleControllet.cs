@@ -2,16 +2,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
 using System;
+using System.Collections;
 
 public class WirePuzzleController : MonoBehaviour
 {
     public static WirePuzzleController Instance;
 
-    public RectTransform wiresContainer;
-    public GameObject insulationPrefab;
+    public Image[] insulationSlots;
     public WireSocket[] leftSockets;
     public WireSocket[] rightSockets;
-    public Color[] wireColors;
 
     public Action OnPuzzleSolved;
 
@@ -21,17 +20,19 @@ public class WirePuzzleController : MonoBehaviour
     public float blurTransitionSpeed = 5f;
     private float targetWeight = 0f;
 
-    public float insulationInsetFromSocket = 15f;
-
-    public InsulationOverride[] insulationOverrides;
-
     public GameObject darkenOverlay;
 
+    public Image successGlow;
+    public float closeDelay = 2f;
 
     private WireSocket selectedSocket;
     private int connectedCount = 0;
 
-    void Awake() => Instance = this;
+    void Awake()
+    {
+        Instance = this;
+        OnPuzzleSolved += HandlePuzzleSolved;
+    }
 
     void OnEnable()
     {
@@ -69,7 +70,25 @@ public class WirePuzzleController : MonoBehaviour
         connectedCount = 0;
         selectedSocket = null;
 
-        foreach (Transform child in wiresContainer) Destroy(child.gameObject);
+        if (insulationSlots != null)
+        {
+            foreach (var slot in insulationSlots)
+            {
+                if (slot != null)
+                {
+                    Color c = slot.color;
+                    c.a = 0f;
+                    slot.color = c;
+                }
+            }
+        }
+
+        if (successGlow != null)
+        {
+            Color c = successGlow.color;
+            c.a = 0f;
+            successGlow.color = c;
+        }
 
         foreach (var s in leftSockets)
         {
@@ -121,7 +140,7 @@ public class WirePuzzleController : MonoBehaviour
 
         if (left.colorId == right.colorId)
         {
-            DrawInsulation(left, right);
+            ShowInsulation(left.colorId);
 
             left.isConnected = true;
             right.isConnected = true;
@@ -132,54 +151,31 @@ public class WirePuzzleController : MonoBehaviour
         }
     }
 
-    InsulationOverride GetOverride(int colorId)
+    void ShowInsulation(int colorId)
     {
-        if (insulationOverrides == null) return null;
-        foreach (var o in insulationOverrides)
-            if (o.colorId == colorId && o.useManualTransform) return o;
-        return null;
+        if (insulationSlots == null || colorId < 0 || colorId >= insulationSlots.Length) return;
+        if (insulationSlots[colorId] == null) return;
+
+        Color c = insulationSlots[colorId].color;
+        c.a = 1f;
+        insulationSlots[colorId].color = c;
     }
 
-    void DrawInsulation(WireSocket left, WireSocket right)
+    void HandlePuzzleSolved()
     {
-        RectTransform line = Instantiate(insulationPrefab, wiresContainer).GetComponent<RectTransform>();
-
-        RectTransform leftRT = left.GetComponent<RectTransform>();
-        RectTransform rightRT = right.GetComponent<RectTransform>();
-
-        Canvas canvas = wiresContainer.GetComponentInParent<Canvas>();
-        Camera cam = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
-
-        Vector2 startScreen = RectTransformUtility.WorldToScreenPoint(cam, leftRT.position);
-        Vector2 endScreen = RectTransformUtility.WorldToScreenPoint(cam, rightRT.position);
-
-        Vector2 startLocal, endLocal;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(wiresContainer, startScreen, cam, out startLocal);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(wiresContainer, endScreen, cam, out endLocal);
-
-        Vector2 dir = endLocal - startLocal;
-        float fullLength = dir.magnitude;
-        Vector2 dirNormalized = fullLength > 0.001f ? dir.normalized : Vector2.right;
-
-        Vector2 adjustedStart = startLocal + dirNormalized * insulationInsetFromSocket;
-        float adjustedLength = fullLength - insulationInsetFromSocket * 2f;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-        var ov = GetOverride(left.colorId);
-        if (ov != null)
+        if (successGlow != null)
         {
-            adjustedStart += ov.manualOffset;
-            angle += ov.manualAngleOffset;
-            adjustedLength *= ov.manualScale;
+            Color c = successGlow.color;
+            c.a = 1f;
+            successGlow.color = c;
         }
+        StartCoroutine(CloseAfterDelay());
+    }
 
-        line.anchoredPosition = adjustedStart;
-        line.sizeDelta = new Vector2(adjustedLength, line.sizeDelta.y);
-        line.localRotation = Quaternion.Euler(0, 0, angle);
-
-        Image img = line.GetComponent<Image>();
-        if (img != null && wireColors != null && wireColors.Length > left.colorId)
-            img.color = wireColors[left.colorId];
+    IEnumerator CloseAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(closeDelay);
+        gameObject.SetActive(false);
     }
 
     [ContextMenu("TEST: Show Puzzle")]
@@ -187,14 +183,4 @@ public class WirePuzzleController : MonoBehaviour
     {
         gameObject.SetActive(true);
     }
-}
-
-[System.Serializable]
-public class InsulationOverride
-{
-    public int colorId;
-    public bool useManualTransform = false;
-    public Vector2 manualOffset;
-    public float manualAngleOffset;
-    public float manualScale = 1f;
 }

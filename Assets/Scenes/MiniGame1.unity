@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 0
+  colorId: 4
   isLeftSide: 1
   isConnected: 0
 --- !u!114 &63342933
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 0
+  colorId: 2
   isLeftSide: 1
   isConnected: 0
 --- !u!114 &225502293
@@ -777,7 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 0
+  colorId: 3
   isLeftSide: 0
   isConnected: 0
 --- !u!114 &676923356
@@ -883,7 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 0
+  colorId: 4
   isLeftSide: 0
   isConnected: 0
 --- !u!114 &748473888
@@ -990,7 +990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 0
+  colorId: 2
   isLeftSide: 0
   isConnected: 0
 --- !u!114 &1158530863
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 0
+  colorId: 3
   isLeftSide: 1
   isConnected: 0
 --- !u!114 &1205218955
@@ -1396,7 +1396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 0
+  colorId: 1
   isLeftSide: 0
   isConnected: 0
 --- !u!114 &1588284748
@@ -1815,7 +1815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 0
+  colorId: 1
   isLeftSide: 1
   isConnected: 0
 --- !u!114 &1836533234
@@ -2081,6 +2081,7 @@ MonoBehaviour:
   blurTransitionSpeed: 5
   insulationInsetFromSocket: 15
   insulationOverrides: []
+  darkenOverlay: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
