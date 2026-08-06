@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 public class WireSocket : MonoBehaviour, IPointerClickHandler
 {
@@ -8,10 +7,12 @@ public class WireSocket : MonoBehaviour, IPointerClickHandler
     public bool isLeftSide;
     [HideInInspector] public bool isConnected = false;
 
+    public WireRoundController roundController;
+
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isConnected) return;
-        WirePuzzleController.Instance.OnSocketClicked(this);
+        roundController.OnSocketClicked(this);
     }
 
     public void SetHighlight(bool on)
