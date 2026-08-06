@@ -131,14 +131,13 @@ GameObject:
   - component: {fileID: 318199998}
   - component: {fileID: 318199997}
   - component: {fileID: 318199996}
-  - component: {fileID: 318200000}
   m_Layer: 0
   m_Name: EmergencyLamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &318199996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Blinking
   targetLight: {fileID: 0}
   minIntensity: 0.1
-  maxIntensity: 2
+  maxIntensity: 100
   pulseInterval: 1.5
   fadeOutDuration: 1
 --- !u!114 &318199997
@@ -192,13 +191,13 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318199995}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 13
-  m_Type: 2
+  m_Type: 0
   m_Color: {r: 0.6132076, g: 0.03760237, b: 0.03760237, a: 1}
-  m_Intensity: 75
-  m_Range: 10
-  m_SpotAngle: 30
+  m_Intensity: 300
+  m_Range: 50
+  m_SpotAngle: 46.616035
   m_InnerSpotAngle: 21.802082
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
@@ -259,29 +258,12 @@ Transform:
   m_GameObject: {fileID: 318199995}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.968, y: 1.61, z: -6.274}
+  m_LocalPosition: {x: -3.968, y: 2.71, z: -5.406}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &318200000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 318199995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 517a4cb88955f43d0b12237b5849060a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Blinking
-  targetLight: {fileID: 0}
-  minIntensity: 0.1
-  maxIntensity: 2
-  pulseInterval: 1.5
-  fadeOutDuration: 1
 --- !u!1 &581009119
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,7 +462,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704090877}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 13
   m_Type: 3
   m_Color: {r: 0.9411765, g: 0.9607843, b: 1, a: 1}
@@ -775,7 +757,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992327840}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1344,7 +1326,7 @@ Light:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606424538}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 13
   m_Type: 2
   m_Color: {r: 1, g: 0.9411765, b: 0.8235294, a: 1}
