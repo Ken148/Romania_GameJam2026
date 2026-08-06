@@ -73,7 +73,8 @@ public class PlayerInteractor : MonoBehaviour
         HandleToolUse(hit);
         HandlePickup(hit);
         HandlePush(hit);
-        HandleOpenDoor(hit);
+        HandlePadlockedDoor(hit);
+        HandleSceneDoor(hit);
     }
 
     private void HandleDrop()
@@ -102,7 +103,7 @@ public class PlayerInteractor : MonoBehaviour
         
     }
 
-    private void HandleOpenDoor(RaycastHit hit)
+    private void HandlePadlockedDoor(RaycastHit hit)
     {
         if (!interactAction.IsPressed())
             return;
@@ -111,6 +112,18 @@ public class PlayerInteractor : MonoBehaviour
         if (door != null)
         {
             door.Open();
+        }
+    }
+
+    private void HandleSceneDoor(RaycastHit hit)
+    {
+        if (!interactAction.WasPressedThisFrame())
+            return;
+
+        SceneDoor door = hit.collider.GetComponentInParent<SceneDoor>();
+        if (door != null){
+            door.Enter();
+            Debug.Log("Switching scenes");
         }
     }
 
