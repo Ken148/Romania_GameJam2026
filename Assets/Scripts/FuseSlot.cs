@@ -46,14 +46,16 @@ public class FuseSlot : MonoBehaviour
             fuse.SetCurrentSlot(this);
 
         boxCollider.enabled = false;
-        light.TurnGreen();
+        if (light != null)
+            light.TurnGreen();
     }
 
     public void OnFusePickedUp()
     {
         heldFuse = null;
         boxCollider.enabled = true;
-        light.TurnRed();
+        if (light != null)
+            light.TurnRed();
     }
 
     public void RemoveFuse()
@@ -63,6 +65,7 @@ public class FuseSlot : MonoBehaviour
 
         heldFuse = null;
         boxCollider.enabled = true;
-        light.TurnRed();
+        if (light != null)
+            light.TurnRed();
     }
 }
