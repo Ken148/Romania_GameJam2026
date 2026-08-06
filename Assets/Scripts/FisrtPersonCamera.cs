@@ -8,12 +8,12 @@ public class FirstPersonCamera : MonoBehaviour
     [SerializeField] float maxPitch = 80f;
 
     [SerializeField] CharacterController controller;
-    [SerializeField] float eyeOffset = 0.4f;
+    [SerializeField] float eyeOffset = 0.2f;
 
     float pitch;
 
-    void Start()
-    {   
+    private void Awake()
+    {
         controller = GetComponentInParent<CharacterController>();
 
         if (!ValidateDependencies())
@@ -21,7 +21,10 @@ public class FirstPersonCamera : MonoBehaviour
             enabled = false;
             return;
         }
+    }
 
+    private void Start()
+    {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

@@ -4,6 +4,7 @@ public class Panel : MonoBehaviour
 {
     [SerializeField] private GameObject cup;
     private Rigidbody cupRb;
+    [SerializeField] private Puzzle puzzle;
 
 
     private Screw[] screws;
@@ -31,6 +32,8 @@ public class Panel : MonoBehaviour
         }
 
         DropCup();
+        puzzle.gameObject.SetActive(true);
+        enabled = false;
     }
 
     private void DropCup()
@@ -41,6 +44,6 @@ public class Panel : MonoBehaviour
         rb.isKinematic = false;
         rb.useGravity = true;
 
-        enabled = false;
+        
     }
 }
