@@ -23,15 +23,27 @@ public class WirePuzzleController : MonoBehaviour
     public GameObject darkenOverlay;
 
     public Image successGlow;
-    public float closeDelay = 2f;
+    public float closeDelay = 0.5f;
 
     private WireSocket selectedSocket;
     private int connectedCount = 0;
+
+
+    [SerializeField] private FirstPersonCamera playerCamera;
+    [SerializeField] private FirstPersonMovement playerMovement;
+    [SerializeField] private PlayerInteractor playerInteractor;
+
+    [SerializeField] private Canvas puzzleCanvas;
+
 
     void Awake()
     {
         Instance = this;
         OnPuzzleSolved += HandlePuzzleSolved;
+
+        playerCamera = FindAnyObjectByType<FirstPersonCamera>();
+        playerMovement = FindAnyObjectByType<FirstPersonMovement>();
+        playerInteractor = FindAnyObjectByType<PlayerInteractor>();
     }
 
     void OnEnable()
@@ -44,10 +56,18 @@ public class WirePuzzleController : MonoBehaviour
 
         targetWeight = 1f;
         if (darkenOverlay != null) darkenOverlay.SetActive(true);
+
+        playerMovement.enabled = false;
+        playerCamera.enabled = false;
+        playerInteractor.enabled = false;
     }
 
     void OnDisable()
     {
+        playerMovement.enabled = true;
+        playerCamera.enabled = true;
+        playerInteractor.enabled = true;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         if (playerController != null) playerController.enabled = true;
@@ -175,7 +195,7 @@ public class WirePuzzleController : MonoBehaviour
     IEnumerator CloseAfterDelay()
     {
         yield return new WaitForSecondsRealtime(closeDelay);
-        gameObject.SetActive(false);
+        puzzleCanvas.gameObject.SetActive(false);
     }
 
     [ContextMenu("TEST: Show Puzzle")]
