@@ -70,11 +70,12 @@ public class PlayerInteractor : MonoBehaviour
 
         Debug.Log(hit.collider.name);
 
-        HandleToolUse(hit);
+        if (HandleToolUse(hit)) return;
         HandlePickup(hit);
         HandlePush(hit);
         HandlePadlockedDoor(hit);
         HandleSceneDoor(hit);
+        HandleBrokenFuse(hit);
     }
 
     private void HandleDrop()
@@ -127,6 +128,18 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
+    private void HandleBrokenFuse(RaycastHit hit)
+    {
+        if (!interactAction.WasPressedThisFrame())
+            return;
+
+        BrokenFuse brokenFuse = hit.collider.GetComponentInParent<BrokenFuse>();
+        if (brokenFuse != null){
+            brokenFuse.removeFuse();
+            Debug.Log("Removing broken fuse");
+        }
+    }
+
     private Vector3 GetCardinalDirection(Vector3 direction)
     {
         direction.y = 0;
@@ -138,14 +151,19 @@ public class PlayerInteractor : MonoBehaviour
     }
 
 
-    private void HandleToolUse(RaycastHit hit)
+    private bool HandleToolUse(RaycastHit hit)
     {
         ITool tool = equipmentManager.CurrentTool;
         if (tool == null)
-            return;
+            return false;
 
         if (IsToolActivated(tool))
+        {
             tool.Use(hit);
+            return true;
+        }
+        return false;
+            
     }
 
     private bool IsToolActivated(ITool tool)

@@ -21,4 +21,6 @@ public class Hammer : MonoBehaviour, ITool, IPickup
 
         debris.Hit(transform.forward);
     }
+
+    public void OnPickedUp() {}
 }

@@ -33,6 +33,7 @@ public class EquipmentManager : MonoBehaviour
 
     public void Equip(IPickup pickup)
     {   
+        pickup.OnPickedUp();
 
         GameObject worldPickup = pickup.WorldObject;
         GameObject heldPrefab = pickup.HeldPrefab;

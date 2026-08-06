@@ -18,4 +18,7 @@ public class Key : MonoBehaviour, ITool, IPickup
         if (padlock != null)
             padlock.Unlock();
     }
+
+    public void OnPickedUp() {}
+
 }
