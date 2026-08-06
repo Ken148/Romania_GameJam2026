@@ -17,10 +17,9 @@ public class Padlock : MonoBehaviour
     {
         isLocked = false;
 
-        //transform.SetParent(null);
+        transform.SetParent(null);
 
         rb.isKinematic = false;
         rb.useGravity = true;
-        //rb.AddForce(Vector3.up * 0.5f, ForceMode.Impulse);
     }
 }
