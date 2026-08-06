@@ -10444,8 +10444,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.886516, y: 0.90888524, z: 10.540385}
-  m_Center: {x: -2.9432232, y: -0.40541515, z: 5.2701926}
+  m_Size: {x: 6.372224, y: 1.7782639, z: 10.540385}
+  m_Center: {x: -2.9163444, y: -0.84010434, z: 5.2701926}
 --- !u!1001 &769119614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12711,8 +12711,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 833449976}
+  - component: {fileID: 833449977}
   m_Layer: 0
-  m_Name: Door 2 (4)
+  m_Name: SceneDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12735,6 +12736,19 @@ Transform:
   - {fileID: 743901303}
   m_Father: {fileID: 1095697932}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &833449977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833449975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94edb3d6fa55fe247a59b5625342dec2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  sceneName: Floor 2
 --- !u!1 &859085886 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100002, guid: 09fd826f68fbfa548b1161b5bf4e738b, type: 3}
@@ -28185,7 +28199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.0731757
+      value: 26.96
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -34456,7 +34470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   door: {fileID: 718054980}
-  openDistance: 1
+  openDistance: 1.5
   speed: 0.2
 --- !u!4 &1712620033 stripped
 Transform:
