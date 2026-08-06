@@ -16154,6 +16154,34 @@ PrefabInstance:
       propertyPath: door
       value: 
       objectReference: {fileID: 1709779908}
+    - target: {fileID: 867141902774294252, guid: 1200f6ee94b7e128eb40f44d27d4b023, type: 3}
+      propertyPath: onPuzzleSolved.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 867141902774294252, guid: 1200f6ee94b7e128eb40f44d27d4b023, type: 3}
+      propertyPath: onPuzzleSolved.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 867141902774294252, guid: 1200f6ee94b7e128eb40f44d27d4b023, type: 3}
+      propertyPath: onPuzzleSolved.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1709779908}
+    - target: {fileID: 867141902774294252, guid: 1200f6ee94b7e128eb40f44d27d4b023, type: 3}
+      propertyPath: onPuzzleSolved.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 867141902774294252, guid: 1200f6ee94b7e128eb40f44d27d4b023, type: 3}
+      propertyPath: onPuzzleSolved.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Open
+      objectReference: {fileID: 0}
+    - target: {fileID: 867141902774294252, guid: 1200f6ee94b7e128eb40f44d27d4b023, type: 3}
+      propertyPath: onPuzzleSolved.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TriggerDoor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 867141902774294252, guid: 1200f6ee94b7e128eb40f44d27d4b023, type: 3}
+      propertyPath: onPuzzleSolved.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 5076523084748102966, guid: 1200f6ee94b7e128eb40f44d27d4b023, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.02478
