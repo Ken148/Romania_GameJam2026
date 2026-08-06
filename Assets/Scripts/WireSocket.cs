@@ -12,7 +12,15 @@ public class WireSocket : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isConnected) return;
-        roundController.OnSocketClicked(this);
+
+        if (roundController != null)
+        {
+            roundController.OnSocketClicked(this);
+        }
+        else if (WirePuzzleController.Instance != null)
+        {
+            WirePuzzleController.Instance.OnSocketClicked(this);
+        }
     }
 
     public void SetHighlight(bool on)

@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 29241949}
   - component: {fileID: 29241948}
   m_Layer: 5
-  m_Name: InsGreen
+  m_Name: InsBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29803923, g: 0.54901963, b: 0.22745098, a: 0}
+  m_Color: {r: 0.22745098, g: 0.37254903, b: 0.627451, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -622,7 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7607843, g: 0.23137255, b: 0.16862746, a: 0}
+  m_Color: {r: 0.72156864, g: 0.2627451, b: 0.47843137, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1034,17 +1034,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 411570423}
-  m_LocalRotation: {x: 0.02840876, y: 0.00437522, z: -0.36347586, w: 0.9311601}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalRotation: {x: 0.03981125, y: 0.0061313123, z: -0.509365, w: 0.85960734}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224739088}
-  m_LocalEulerAnglesHint: {x: 3.215, y: -0.718, z: -42.666}
+  m_LocalEulerAnglesHint: {x: 4.283, y: -1.725, z: -61.363}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -548, y: -132}
-  m_SizeDelta: {x: 273.5251, y: 273.5222}
+  m_AnchoredPosition: {x: -556, y: -65}
+  m_SizeDelta: {x: 394.3203, y: 394.3162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &411570425
 MonoBehaviour:
@@ -1058,9 +1058,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2b10dcd1243480ba41c78640b8f281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalizedTransform
-  normalizedPosition: {x: -0.0074074073, y: 0.37777779}
-  rotationZ: 317.33374
-  normalizedSize: {x: 0.25326398, y: 0.2532613}
+  normalizedPosition: {x: -0.014814815, y: 0.4398148}
+  rotationZ: 298.6373
+  normalizedSize: {x: 0.3651114, y: 0.3651076}
   background: {fileID: 847107819}
 --- !u!114 &411570426
 MonoBehaviour:
@@ -1396,7 +1396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.72156864, g: 0.2627451, b: 0.47843137, a: 0}
+  m_Color: {r: 0.29803923, g: 0.54901963, b: 0.22745098, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1856,7 +1856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 1
+  colorId: 2
   isLeftSide: 0
   isConnected: 0
   roundController: {fileID: 786476495}
@@ -1873,7 +1873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22745098, g: 0.37254903, b: 0.627451, a: 0}
+  m_Color: {r: 0.7607843, g: 0.23137255, b: 0.16862746, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2537,7 +2537,7 @@ GameObject:
   - component: {fileID: 788962890}
   - component: {fileID: 788962889}
   m_Layer: 5
-  m_Name: InsPink
+  m_Name: InsGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2591,7 +2591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.72156864, g: 0.2627451, b: 0.47843137, a: 0}
+  m_Color: {r: 0.29803923, g: 0.54901963, b: 0.22745098, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2813,7 +2813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.72156864, g: 0.2627451, b: 0.47843137, a: 0}
+  m_Color: {r: 0.29803923, g: 0.54901963, b: 0.22745098, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2895,7 +2895,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 315b01a2676b846c7835653eb977c894, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3b2db5764627e4c2e806ee0a6a0bb9b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2930,7 +2930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &849095702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3154,7 +3154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29803923, g: 0.54901963, b: 0.22745098, a: 0}
+  m_Color: {r: 0.22745098, g: 0.37254903, b: 0.627451, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3303,7 +3303,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &979371401
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4230,7 +4230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22745098, g: 0.37254903, b: 0.627451, a: 0}
+  m_Color: {r: 0.7882353, g: 0.63529414, b: 0.15294118, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4337,7 +4337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7607843, g: 0.23137255, b: 0.16862746, a: 0}
+  m_Color: {r: 0.72156864, g: 0.2627451, b: 0.47843137, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4631,7 +4631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7882353, g: 0.63529414, b: 0.15294118, a: 0}
+  m_Color: {r: 0.7607843, g: 0.23137255, b: 0.16862746, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4784,7 +4784,7 @@ GameObject:
   - component: {fileID: 1725345854}
   - component: {fileID: 1725345853}
   m_Layer: 5
-  m_Name: InsBlue
+  m_Name: InsRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4797,17 +4797,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725345851}
-  m_LocalRotation: {x: -0.0025162944, y: -0.0026290433, z: -0.57160336, w: 0.820522}
+  m_LocalRotation: {x: -0.006773774, y: -0.0070772907, z: -0.5057613, w: 0.8626178}
   m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 224739088}
-  m_LocalEulerAnglesHint: {x: -0.409, y: -0.082, z: -69.724}
+  m_LocalEulerAnglesHint: {x: -1.08, y: -0.307, z: -60.764}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -562, y: -130}
-  m_SizeDelta: {x: 561.7697, y: 561.7697}
+  m_AnchoredPosition: {x: -554, y: -193}
+  m_SizeDelta: {x: 389.0699, y: 389.0699}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1725345853
 MonoBehaviour:
@@ -4821,9 +4821,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2b10dcd1243480ba41c78640b8f281, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalizedTransform
-  normalizedPosition: {x: -0.02037037, y: 0.37962964}
-  rotationZ: 290.27554
-  normalizedSize: {x: 0.52015716, y: 0.52015716}
+  normalizedPosition: {x: -0.0129629625, y: 0.3212963}
+  rotationZ: 299.23584
+  normalizedSize: {x: 0.3602499, y: 0.3602499}
   background: {fileID: 847107819}
 --- !u!114 &1725345854
 MonoBehaviour:
@@ -4838,7 +4838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.22745098, g: 0.37254903, b: 0.627451, a: 0}
+  m_Color: {r: 0.7607843, g: 0.23137255, b: 0.16862746, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5401,7 +5401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.29803923, g: 0.54901963, b: 0.22745098, a: 0}
+  m_Color: {r: 0.22745098, g: 0.37254903, b: 0.627451, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6100,7 +6100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d6a01f8a26cb492b966962aa6f29d03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WireSocket
-  colorId: 2
+  colorId: 1
   isLeftSide: 0
   isConnected: 0
   roundController: {fileID: 786476495}
@@ -6155,7 +6155,7 @@ GameObject:
   - component: {fileID: 2109337091}
   - component: {fileID: 2109337090}
   m_Layer: 5
-  m_Name: InsRed
+  m_Name: InsPink
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6209,7 +6209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7607843, g: 0.23137255, b: 0.16862746, a: 0}
+  m_Color: {r: 0.72156864, g: 0.2627451, b: 0.47843137, a: 0}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
