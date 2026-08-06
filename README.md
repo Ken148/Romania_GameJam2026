@@ -1,4 +1,4 @@
-# SHIPWRECK
+# ONLY ONE WAY OUT
 
 ## DESIGN DOCUMENT
 
@@ -292,7 +292,7 @@ Lighting, environmental storytelling, realistic sound design, and minimal UI hel
 
 | Member | Responsibilities |
 |---------|------------------|
-| **Ken** | Level design, environment creation, GitHub repository management |
+| **Ken** | Level design, environment creation, GitHub repository management, voice lines, sound effects |
 | **Anastacia** | Gameplay programming, puzzle mechanics, interaction systems |
 | **Arseni** | Lighting, post-processing, visual effects, environmental polish |
 
@@ -306,7 +306,7 @@ Lighting, environmental storytelling, realistic sound design, and minimal UI hel
 | **01.08.2026** | Built the first floor, implemented player movement, basic interaction, and lighting. | Level Design & Programming |
 | **02.08.2026** | Created the second floor, implemented item pickup/drop mechanics, polished the first floor. | Level Design & Programming |
 | **03.08.2026** | Implement rising water system, tool mechanics, and environmental puzzles. | Gameplay |
-| **04.08.2026** ||
-| **05.08.2026** ||
-| **06.08.2026** ||
-| **07.08.2026** ||
+| **04.08.2026** | Created environmental mechanics, improved lighting, and designed parts of additional floors.| Level Design & Gameplay |
+| **05.08.2026** | Continued environment design, expanded floor layouts, added more gameplay elements, and refined existing mechanics. | Level Design & Gameplay |
+| **06.08.2026** | Created voice lines and sound effects, finished maps, completed remaining mechanics. | Audio & Final Development |
+| **07.08.2026** | Polished floors 2 and 3, improved lighting and visual effects, added the ending sequence, and performed final bug fixes and improvements. | Polish & Finalization |
