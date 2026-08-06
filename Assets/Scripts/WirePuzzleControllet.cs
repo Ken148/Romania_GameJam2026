@@ -35,6 +35,8 @@ public class WirePuzzleController : MonoBehaviour
 
     [SerializeField] private Canvas puzzleCanvas;
 
+    [SerializeField] private TriggerDoor door;
+
 
     void Awake()
     {
@@ -190,6 +192,10 @@ public class WirePuzzleController : MonoBehaviour
             successGlow.color = c;
         }
         StartCoroutine(CloseAfterDelay());
+        if (door != null)
+            door.Open();
+        else 
+            Debug.Log("No trigger door was found");
     }
 
     IEnumerator CloseAfterDelay()
