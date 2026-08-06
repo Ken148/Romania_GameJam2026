@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering;
 using System;
 using System.Collections;
-
+using UnityEngine.Events;
 public class WirePuzzleController : MonoBehaviour
 {
     public static WirePuzzleController Instance;
@@ -12,7 +12,8 @@ public class WirePuzzleController : MonoBehaviour
     public WireSocket[] leftSockets;
     public WireSocket[] rightSockets;
 
-    public Action OnPuzzleSolved;
+    
+    [SerializeField] private UnityEvent onPuzzleSolved;
 
     public MonoBehaviour playerController;
 
@@ -35,13 +36,11 @@ public class WirePuzzleController : MonoBehaviour
 
     [SerializeField] private Canvas puzzleCanvas;
 
-    [SerializeField] private TriggerDoor door;
-
 
     void Awake()
     {
         Instance = this;
-        OnPuzzleSolved += HandlePuzzleSolved;
+        onPuzzleSolved.AddListener(HandlePuzzleSolved);
 
         playerCamera = FindAnyObjectByType<FirstPersonCamera>();
         playerMovement = FindAnyObjectByType<FirstPersonMovement>();
@@ -169,7 +168,7 @@ public class WirePuzzleController : MonoBehaviour
             connectedCount++;
 
             if (connectedCount >= leftSockets.Length)
-                OnPuzzleSolved?.Invoke();
+                onPuzzleSolved?.Invoke();
         }
     }
 
@@ -192,10 +191,6 @@ public class WirePuzzleController : MonoBehaviour
             successGlow.color = c;
         }
         StartCoroutine(CloseAfterDelay());
-        if (door != null)
-            door.Open();
-        else 
-            Debug.Log("No trigger door was found");
     }
 
     IEnumerator CloseAfterDelay()
