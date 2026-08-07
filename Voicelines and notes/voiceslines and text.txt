@@ -1,0 +1,155 @@
+Floor 1:
+--------------------journal--------------------------
+
+(Page 1)
+
+Mihai Petrescu
+Marine Systems Technician
+M/V Horizon Dawn
+
+Fifth month aboard the Horizon Dawn.
+
+When I first accepted this contract, I thought I would only be away from home for a few months. Fix machines, inspect equipment, collect my pay, and return to Constanța.
+
+The ocean always sounds easier from the shore.
+
+Working on cargo ships is different. Every day there is something new breaking. Pumps fail, generators need repairs, pipes leak. The ship is like a living thing. If you ignore one small problem, eventually it becomes a much bigger one.
+
+The crew has been good to me. Long hours, bad coffee, and too many arguments about football, but they are good people.
+
+
+
+(Page 2)
+
+The last few weeks have been strange.
+
+The captain ordered extra inspections after several failures in the lower decks. Some systems are older than they should be, and replacement parts are becoming harder to find.
+
+I have been spending most of my time below deck repairing electrical systems and checking the emergency equipment.
+
+Something about this voyage feels wrong.
+
+Maybe it is just exhaustion.
+
+Tomorrow we continue through rough waters. I need to finish checking the lower compartments before my next shift.
+
+Hopefully after this trip I can finally go home.
+
+
+------------------Note-----------------------------
+
+
+Mihai,
+
+Moved the repair tools and parts to Storage Room 2.
+They're behind the big cargo boxes.
+
+— Daniel
+
+
+-----------------door interaction text---------------
+
+The door does not open.
+
+The electronic lock has no power.
+
+A maintenance tool may be required to access the electrical panel.
+
+
+-----------------locked door voiceline-----------------------
+
+It's Locked.
+
+The key should be somewhere nearby.
+
+----------------near box pushing voiceline---------------------
+
+Maybe I can push this box to get back there.
+
+
+--------------door opens voiceline---------------------------
+
+I need to get to the upper decks before the flooding gets worse.
+
+------------wake up voiceline-------------------------------
+
+...What happened?
+
+The ship... it’s flooding.
+
+I need to get out of here. The emergency exit should be on the upper decks.
+
+I need to move. Now.
+
+-----------------------------------------------------------------------
+
+Floor 2:
+
+-------------entering floor 2 voiceline--------------------------------
+
+The upper decks are still accessible.
+
+The emergency exit should be inside the room on the right.
+
+Damn... the way is blocked.
+
+I need something strong enough to move this debris. I don't have much time.
+
+------------------------hammer pickup voiceline---------------------------
+
+This might work.
+
+Should be strong enough to clear the debris.
+
+-----------------------clicking on the fuses or door voiceline----------------------
+
+The door still has power, but the lock circuit is damaged.
+
+The fuses are blown. I need to find replacements and get this door working again.
+
+--------------------explanation of fuse puzzple floor 2 after clicking fuse box---------------------
+
+The fuse boxes are still live.
+
+I can't remove the fuses while the power is connected.
+
+I need to shut down the electrical panels first.
+
+-----------------------opening door 2 floor 2 voiceline------------------------
+
+The door is open.
+
+The control room should be just up these stairs.
+
+From there, I should be able to get outside through the windows.
+
+------------------------emergency shutdown procedure note------------------------------
+
+Emergency Shutdown Procedure
+
+In case of emergency:
+
+Disable the three electrical panels around the engine room before accessing the fuse boxes.
+
+Panel locations:
+
+One panel on the lower level
+Two panels on the upper level
+
+Only remove fuses after the power has been completely shut down.
+
+— Engine Room Maintenance
+
+---------------------------------------------------------------------------------------
+
+Floor 3:
+
+-------------------------------entering floor 3 voiceline-------------------------------
+
+The windows should break easily enough.
+
+But the lifeboat is still attached to the crane.
+
+I need to find the controls and lower it before I leave the control room.
+
+
