@@ -10,7 +10,7 @@
 
 ## Game Summary
 
-**Shipwreck** is a first-person story-driven puzzle game developed for the **Romania 2026 One Week Game Jam**. Players awaken aboard a heavily damaged industrial cargo ship after a catastrophic crash at sea. As the ship rapidly floods, they must solve environmental puzzles, repair damaged systems, and escape before the vessel sinks beneath the ocean.
+**ONLY ONE WAY OUT** is a first-person story-driven puzzle game developed for the **Romania 2026 One Week Game Jam**. Players awaken aboard a heavily damaged industrial cargo ship after a catastrophic crash at sea. As the ship rapidly floods, they must solve environmental puzzles, repair damaged systems, and escape before the vessel sinks beneath the ocean.
 
 Rather than fighting enemies, players race against **time** as rising water continuously transforms the environment, blocking paths and increasing the tension throughout the adventure.
 
