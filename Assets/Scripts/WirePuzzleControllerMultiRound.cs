@@ -10,9 +10,10 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
 {
     public static WirePuzzleControllerMultiRound Instance;
 
-    public FirstPersonCamera cameraController;
-
-    public PlayerInput playerInput;
+    [Header("Player")]
+    [SerializeField] private FirstPersonCamera playerCamera;
+    [SerializeField] private FirstPersonMovement playerMovement;
+    [SerializeField] private PlayerInteractor playerInteractor;
 
     [Header("Rounds")]
     public GameObject[] roundObjects;
@@ -20,8 +21,6 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
     private int currentRoundIndex = 0;
 
     public Action OnPuzzleSolved;
-
-    public FirstPersonMovement playerController;
 
     public Volume blurVolume;
     public float blurTransitionSpeed = 5f;
@@ -40,12 +39,17 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
     private bool timerActive = false;
 
     [SerializeField] private PuzzlePlate puzzlePlate;
+
     [SerializeField] private GameObject puzzle;
 
     void Awake()
     {
         Instance = this;
         OnPuzzleSolved += HandlePuzzleSolved;
+
+        playerCamera = FindAnyObjectByType<FirstPersonCamera>();
+        playerMovement = FindAnyObjectByType<FirstPersonMovement>();
+        playerInteractor = FindAnyObjectByType<PlayerInteractor>();
     }
 
     void OnEnable()
@@ -55,73 +59,80 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        if (playerController != null) playerController.enabled = false;
-        if (playerInput != null) playerInput.enabled = false;
-        if (cameraController != null) cameraController.enabled = false;
+
+        if (playerMovement != null) playerMovement.enabled = false;
+        if (playerCamera != null) playerCamera.enabled = false;
+        if (playerInteractor != null) playerInteractor.enabled = false;
 
         targetWeight = 1f;
-        if (darkenOverlay != null) darkenOverlay.SetActive(true);
+        if (darkenOverlay != null)
+            darkenOverlay.SetActive(true);
 
         currentTime = timeLimit;
         timerActive = true;
 
-        if (circularTimer != null) circularTimer.SetTime(currentTime, timeLimit);
+        if (circularTimer != null)
+            circularTimer.SetTime(currentTime, timeLimit);
     }
 
     void OnDisable()
     {
+        Debug.Log("Puzzle OnDisable");
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        if (playerController != null) playerController.enabled = true;
-        if (playerInput != null) playerInput.enabled = true;
-        if (cameraController != null) cameraController.enabled = true;
+
+        if (playerMovement != null) playerMovement.enabled = true;
+        if (playerCamera != null) playerCamera.enabled = true;
+        if (playerInteractor != null) playerInteractor.enabled = true;
 
         targetWeight = 0f;
-        if (blurVolume != null) blurVolume.weight = 0f;
-        if (darkenOverlay != null) darkenOverlay.SetActive(false);
+
+        if (blurVolume != null)
+            blurVolume.weight = 0f;
+
+        if (darkenOverlay != null)
+            darkenOverlay.SetActive(false);
 
         timerActive = false;
 
-        for (int i = 0; i < roundObjects.Length; i++)
-            roundObjects[i].SetActive(false);
+        foreach (GameObject round in roundObjects)
+            round.SetActive(false);
     }
 
     void Update()
     {
-        if (blurVolume != null && blurVolume.weight != targetWeight)
+        if (blurVolume != null)
         {
-            blurVolume.weight = Mathf.MoveTowards(blurVolume.weight, targetWeight, blurTransitionSpeed * Time.unscaledDeltaTime);
+            blurVolume.weight = Mathf.MoveTowards(
+                blurVolume.weight,
+                targetWeight,
+                blurTransitionSpeed * Time.unscaledDeltaTime);
         }
 
-        if (timerActive)
+        if (!timerActive)
+            return;
+
+        currentTime -= Time.unscaledDeltaTime;
+
+        if (timerText != null)
+            timerText.text = Mathf.Max(0, Mathf.CeilToInt(currentTime)).ToString();
+
+        if (circularTimer != null)
+            circularTimer.SetTime(currentTime, timeLimit);
+
+        if (currentTime <= 0f)
         {
-            currentTime -= Time.unscaledDeltaTime;
-
-            if (timerText != null)
-                timerText.text = Mathf.Max(0, Mathf.CeilToInt(currentTime)).ToString();
-
-            if (circularTimer != null)
-                circularTimer.SetTime(currentTime, timeLimit);
-
-            if (currentTime <= 0f)
-            {
-                timerActive = false;
-                StartCoroutine(TimeUpSequence());
-            }
+            timerActive = false;
+            StartCoroutine(TimeUpSequence());
         }
     }
 
     void StartRound(int index)
     {
-        Debug.Log($"StartRound called with index: {index}, roundObjects.Length: {roundObjects.Length}");
-
         for (int i = 0; i < roundObjects.Length; i++)
-        {
-            Debug.Log($"Setting roundObjects[{i}] ({roundObjects[i].name}) active = {i == index}");
             roundObjects[i].SetActive(i == index);
-        }
 
-        Debug.Log($"Calling ResetRound on roundControllers[{index}]: {roundControllers[index].gameObject.name}");
         roundControllers[index].ResetRound();
         roundControllers[index].OnRoundSolved = OnRoundSolved;
     }
@@ -136,29 +147,24 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
         currentTime = timeLimit;
         timerActive = true;
 
-        if (circularTimer != null) circularTimer.SetTime(currentTime, timeLimit);
+        if (circularTimer != null)
+            circularTimer.SetTime(currentTime, timeLimit);
     }
 
     public void OnRoundSolved()
     {
-        Debug.Log($"OnRoundSolved called! currentRoundIndex was: {currentRoundIndex}");
         currentRoundIndex++;
-        Debug.Log($"New currentRoundIndex: {currentRoundIndex}, roundObjects.Length: {roundObjects.Length}");
 
         if (currentRoundIndex >= roundObjects.Length)
         {
-            Debug.Log("Puzzle fully solved!");
             timerActive = false;
             OnPuzzleSolved?.Invoke();
         }
         else
         {
-            Debug.Log($"Starting next round: {currentRoundIndex}");
             StartRound(currentRoundIndex);
         }
     }
-
-
 
     void HandlePuzzleSolved()
     {
@@ -170,21 +176,27 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
             c.a = 1f;
             successGlow.color = c;
         }
+
         StartCoroutine(CloseAfterDelay());
     }
-
-
 
     IEnumerator CloseAfterDelay()
     {
         yield return new WaitForSecondsRealtime(closeDelay);
-           puzzle.SetActive(false);
 
-    }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
-    [ContextMenu("TEST: Show Puzzle")]
-    public void TestShowPuzzle()
-    {
-        gameObject.SetActive(true);
+        playerMovement.enabled = true;
+        playerCamera.enabled = true;
+        playerInteractor.enabled = true;
+
+        if (blurVolume != null)
+            blurVolume.weight = 0f;
+
+        if (darkenOverlay != null)
+            darkenOverlay.SetActive(false);
+
+        puzzle.SetActive(false);
     }
 }
