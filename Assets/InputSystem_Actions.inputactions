@@ -1002,6 +1002,26 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "SolvePuzzlesFloor2",
+                    "type": "Button",
+                    "id": "8fdfbc73-f3a0-4056-a187-8bace475f63d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "InsertFusesFloor2",
+                    "type": "Button",
+                    "id": "624bc58c-cc24-45e3-b257-8fe702415137",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -1024,6 +1044,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Restart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0f4f8fdf-4ddf-46d8-b50c-5b8ffea1dd4c",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SolvePuzzlesFloor2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50fc2405-ff76-42f6-b234-0996ffa41223",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InsertFusesFloor2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5438b3f7-be67-4441-ab4f-7cb33bffa481",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InsertFusesFloor2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -8,6 +8,8 @@ public class FuseSlot : MonoBehaviour
     [SerializeField] private GameObject heldFuse;
     private BoxCollider boxCollider;
 
+    [SerializeField] private FuseGroup fuseGroup;
+
     private void Awake()
     {
         boxCollider = GetComponent<BoxCollider>();
@@ -48,6 +50,9 @@ public class FuseSlot : MonoBehaviour
         boxCollider.enabled = false;
         if (light != null)
             light.TurnGreen();
+        Debug.Log("About to call FuseInserted");
+        fuseGroup?.FuseInserted();
+        Debug.Log("Returned from FuseInserted");
     }
 
     public void OnFusePickedUp()
@@ -56,6 +61,7 @@ public class FuseSlot : MonoBehaviour
         boxCollider.enabled = true;
         if (light != null)
             light.TurnRed();
+        fuseGroup?.FuseRemoved();
     }
 
     public void RemoveFuse()
@@ -67,5 +73,6 @@ public class FuseSlot : MonoBehaviour
         boxCollider.enabled = true;
         if (light != null)
             light.TurnRed();
+        fuseGroup?.FuseRemoved();
     }
 }

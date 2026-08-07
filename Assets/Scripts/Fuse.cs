@@ -13,9 +13,19 @@ public class Fuse : MonoBehaviour, IPickup, ITool
     public GameObject PickupPrefab => pickupPrefab;
     public ToolInput Input => ToolInput.Attack;
 
+    [SerializeField] private Collider collider;
+
+
+
     private void Awake()
     {
         equipmentManager = FindAnyObjectByType<EquipmentManager>();
+        collider = GetComponent<Collider>();
+    }
+
+    public void Unlock()
+    {
+        collider.enabled = true;
     }
 
     public void Use(RaycastHit hit)

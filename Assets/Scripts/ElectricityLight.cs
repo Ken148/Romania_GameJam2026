@@ -7,7 +7,7 @@ public class ElectricityLight : MonoBehaviour
 
     private Material mat;
 
-    private void Start()
+    private void Awake()
     {
         mat = meshRenderer.material;
         mat.color = defaultColor;
