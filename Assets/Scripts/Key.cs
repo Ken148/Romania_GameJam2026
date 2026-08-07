@@ -9,7 +9,7 @@ public class Key : MonoBehaviour, ITool, IPickup
     public GameObject WorldObject => gameObject;
     public GameObject PickupPrefab => pickupPrefab;
 
-    public ToolInput Input => ToolInput.Interact;
+    public ToolInput Input => ToolInput.Attack;
 
     public void Use(RaycastHit hit)
     {
