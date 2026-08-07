@@ -39,6 +39,9 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
     private float currentTime;
     private bool timerActive = false;
 
+    [SerializeField] private PuzzlePlate puzzlePlate;
+    [SerializeField] private GameObject puzzle;
+
     void Awake()
     {
         Instance = this;
@@ -159,6 +162,8 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
 
     void HandlePuzzleSolved()
     {
+        puzzlePlate.PuzzleSolved();
+
         if (successGlow != null)
         {
             Color c = successGlow.color;
@@ -173,7 +178,8 @@ public class WirePuzzleControllerMultiRound : MonoBehaviour
     IEnumerator CloseAfterDelay()
     {
         yield return new WaitForSecondsRealtime(closeDelay);
-        gameObject.SetActive(false);
+           puzzle.SetActive(false);
+
     }
 
     [ContextMenu("TEST: Show Puzzle")]

@@ -76,6 +76,8 @@ public class PlayerInteractor : MonoBehaviour
         HandlePadlockedDoor(hit);
         HandleSceneDoor(hit);
         HandleBrokenFuse(hit);
+        HandlePuzzlePlate(hit);
+        HandleBoat(hit);
     }
 
     private void HandleDrop()
@@ -191,6 +193,16 @@ public class PlayerInteractor : MonoBehaviour
             equipmentManager.Equip(pickup);
     }
 
+    private void HandlePuzzlePlate(RaycastHit hit)
+    {
+        if (!interactAction.WasPressedThisFrame())
+            return;
+
+        PuzzlePlate plate = hit.collider.GetComponentInParent<PuzzlePlate>();
+        if (plate != null)
+            plate.Interact();
+    }
+
     private bool TryGetHit(out RaycastHit hit)
     {
         return Physics.Raycast(
@@ -200,6 +212,16 @@ public class PlayerInteractor : MonoBehaviour
             interactDistance,
             interactMask
         );
+    }
+
+    private void HandleBoat(RaycastHit hit)
+    {
+        if (!interactAction.WasPressedThisFrame())
+            return;
+
+        Boat boat = hit.collider.GetComponentInParent<Boat>();
+        if (boat != null)
+            boat.Interact();
     }
 
     
