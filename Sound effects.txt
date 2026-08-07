@@ -1,0 +1,39 @@
+Floor 1:
+-------------------------
+Picking up key
+Dropping key
+Picking up screwdriver
+Dropping screwdriver
+Pushing box
+Walking in water
+Objects falling/dropped into water
+Background tense music
+Red emergency light sound effect
+Sliding door opening
+Unscrewing screws
+Picking up paper to read
+Panel falling down
+Sound of sparks
+opening door to floor 2
+
+Floor 2:
+-----------------------
+
+wood hitting sound
+wood braking sound
+metal hitting sound
+metal plate falling
+electricity turning off
+taking fuse out
+putting fuse it
+hammer swinging 
+
+Floor 3:
+-----------------------
+Boat water splash
+Impact
+Grunt
+Glass break
+Click
+Background music ending
+Sea sounds
