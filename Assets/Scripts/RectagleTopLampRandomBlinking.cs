@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FlickeringLight : MonoBehaviour
 {
-    public Light targetLight;
+    public Light[] targetLights;
 
     [Header("Normal State")]
     public float normalIntensity = 1.5f;
@@ -28,11 +28,23 @@ public class FlickeringLight : MonoBehaviour
 
     void Start()
     {
-        if (targetLight == null)
-            targetLight = GetComponent<Light>();
+        if (targetLights == null || targetLights.Length == 0)
+        {
+            Light own = GetComponent<Light>();
+            targetLights = own != null ? new Light[] { own } : new Light[0];
+        }
 
-        targetLight.intensity = normalIntensity;
+        SetIntensity(normalIntensity);
         StartCoroutine(FlickerLoop());
+    }
+
+    void SetIntensity(float value)
+    {
+        for (int i = 0; i < targetLights.Length; i++)
+        {
+            if (targetLights[i] != null)
+                targetLights[i].intensity = value;
+        }
     }
 
     IEnumerator FlickerLoop()
@@ -52,22 +64,22 @@ public class FlickeringLight : MonoBehaviour
 
         for (int i = 0; i < flickerCount; i++)
         {
-            targetLight.intensity = 0f;
+            SetIntensity(0f);
             float offDur = Random.Range(minOffDuration, maxOffDuration);
             yield return new WaitForSeconds(offDur);
 
             bool spike = Random.value > 0.5f;
-            targetLight.intensity = spike ? flickerSpikeIntensity : normalIntensity;
+            SetIntensity(spike ? flickerSpikeIntensity : normalIntensity);
             float onDur = Random.Range(minSpikeDuration, maxSpikeDuration);
             yield return new WaitForSeconds(onDur);
         }
 
         if (Random.value < chanceOfExtendedDarkness)
         {
-            targetLight.intensity = 0f;
+            SetIntensity(0f);
             yield return new WaitForSeconds(extendedDarknessDuration);
         }
 
-        targetLight.intensity = normalIntensity;
+        SetIntensity(normalIntensity);
     }
 }
