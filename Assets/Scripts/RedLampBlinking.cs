@@ -7,19 +7,29 @@ public class Blinking : MonoBehaviour
     [Header("Pulse Settings")]
     public float minIntensity = 0.1f;
     public float maxIntensity = 2f;
-    public float pulseInterval = 1.5f; // время между вспышками
-    public float fadeOutDuration = 1.0f; // сколько длится затухание
+    public float pulseInterval = 1.5f;
+    public float fadeOutDuration = 1.0f;
 
     private float timer;
 
     void Start()
     {
         if (targetLight == null)
-            targetLight = GetComponent<Light>();
+        {
+            targetLight = GetComponentInChildren<Light>();
+        }
+
+        if (targetLight == null)
+        {
+            Debug.LogWarning("Blinking: No Light found on this object or its children.");
+        }
     }
 
     void Update()
     {
+        if (targetLight == null)
+            return;
+
         timer += Time.deltaTime;
 
         if (timer >= pulseInterval)
@@ -27,9 +37,13 @@ public class Blinking : MonoBehaviour
 
         if (timer <= fadeOutDuration)
         {
-            // Плавное затухание от max к min
             float t = timer / fadeOutDuration;
-            targetLight.intensity = Mathf.Lerp(maxIntensity, minIntensity, t);
+
+            targetLight.intensity = Mathf.Lerp(
+                maxIntensity,
+                minIntensity,
+                t
+            );
         }
         else
         {
