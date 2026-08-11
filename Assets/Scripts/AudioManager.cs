@@ -496,7 +496,19 @@ public class AudioManager : MonoBehaviour
         source.loop = sound.loop;
         source.playOnAwake = false;
 
+        // =====================================================
+        // 3D AUDIO
+        // =====================================================
+
         source.spatialBlend = 1f;
+
+        // Linear distance falloff.
+        source.rolloffMode = AudioRolloffMode.Linear;
+
+        // Distance at which the sound is at full volume.
+        source.minDistance = 1f;
+
+        // Distance at which the sound becomes silent.
         source.maxDistance = sound.maxDistance;
 
         sound.source = source;
@@ -706,6 +718,14 @@ public class AudioManager : MonoBehaviour
         source.volume =
             Mathf.Clamp01(sound.endVolume);
 
+        // IMPORTANT:
+        // Re-apply 3D settings in case another script changed
+        // the AudioSource.
+        source.spatialBlend = 1f;
+        source.rolloffMode = AudioRolloffMode.Linear;
+        source.minDistance = 1f;
+        source.maxDistance = sound.maxDistance;
+
         if (!source.isPlaying)
         {
             source.time = 0f;
@@ -817,8 +837,16 @@ public class AudioManager : MonoBehaviour
         source.clip = sound.clip;
         source.volume = sound.endVolume;
         source.pitch = sound.speed;
+
+        // =====================================================
+        // 3D AUDIO
+        // =====================================================
+
         source.spatialBlend = 1f;
+        source.rolloffMode = AudioRolloffMode.Linear;
+        source.minDistance = 1f;
         source.maxDistance = sound.maxDistance;
+
         source.playOnAwake = false;
         source.loop = sound.loop;
 
