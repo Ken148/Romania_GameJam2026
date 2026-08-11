@@ -32,27 +32,85 @@ public class EquipmentManager : MonoBehaviour
     }
 
     public void Equip(IPickup pickup)
-    {   
-        pickup.OnPickedUp();
+    {
+        if (pickup == null)
+        {
+            Debug.LogError("EquipmentManager: pickup is NULL.");
+            return;
+        }
+
+        // -----------------------------------------------------
+        // DROP CURRENT TOOL FIRST
+        // -----------------------------------------------------
+
+        Drop();
+
+        // -----------------------------------------------------
+        // GET PICKUP INFORMATION
+        // -----------------------------------------------------
 
         GameObject worldPickup = pickup.WorldObject;
         GameObject heldPrefab = pickup.HeldPrefab;
-        
+
+        if (heldPrefab == null)
+        {
+            Debug.LogError("EquipmentManager: HeldPrefab is NULL.");
+            return;
+        }
+
+        // -----------------------------------------------------
+        // PICKUP ACTION
+        // -----------------------------------------------------
+
+        pickup.OnPickedUp();
+
+        // -----------------------------------------------------
+        // CREATE HELD TOOL
+        // -----------------------------------------------------
+
         Debug.Log($"Held prefab: {heldPrefab}", this);
-        Drop();
+
         equippedToolObject = Instantiate(heldPrefab);
-        equippedToolObject.transform.SetParent(rightHandSocket, false);
-        ITool tool = equippedToolObject.GetComponent<ITool>();
+
+        equippedToolObject.transform.SetParent(
+            rightHandSocket,
+            false
+        );
+
+        ITool tool =
+            equippedToolObject.GetComponent<ITool>();
+
         if (tool == null)
         {
             Destroy(equippedToolObject);
-            Debug.LogError("This object is not a tool.");
+
+            Debug.LogError(
+                "This object is not a tool."
+            );
+
             return;
         }
+
         currentTool = tool;
 
+        // -----------------------------------------------------
+        // DESTROY WORLD PICKUP
+        // -----------------------------------------------------
+
         Destroy(worldPickup);
-        
+
+        // -----------------------------------------------------
+        // PLAY CORRECT PICKUP SOUND
+        // -----------------------------------------------------
+
+        if (currentTool is Key)
+        {
+            AudioManager.Instance.PlayKeyPickup();
+        }
+        else if (currentTool is Screwdriver)
+        {
+            AudioManager.Instance.PlayScrewdriverPickup();
+        }
     }
 
     public void Unequip()
@@ -60,6 +118,7 @@ public class EquipmentManager : MonoBehaviour
         Destroy(equippedToolObject);
         equippedToolObject = null;
         currentTool = null;
+
     }
 
     public void Drop()
@@ -87,9 +146,9 @@ public class EquipmentManager : MonoBehaviour
             );
         }
 
-        // =====================================================
+        // -----------------------------------------------------
         // DROP SOUND
-        // =====================================================
+        // -----------------------------------------------------
 
         if (currentTool is Key)
         {
@@ -102,6 +161,6 @@ public class EquipmentManager : MonoBehaviour
 
         Unequip();
     }
-    
+
 
 }

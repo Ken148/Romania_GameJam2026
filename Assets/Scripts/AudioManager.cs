@@ -1004,6 +1004,12 @@ public class AudioManager : MonoBehaviour
     public void PlayFloor2DoorOpen()
         => PlaySound(floor2DoorOpen);
 
+    public void StartBoxPush()
+        => PlayLoop(boxPush);
+
+    public void StopBoxPush()
+        => StopSound(boxPush);
+
     // =========================================================
     // FLOOR 2
     // =========================================================
