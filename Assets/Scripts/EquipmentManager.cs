@@ -67,7 +67,8 @@ public class EquipmentManager : MonoBehaviour
         if (currentTool == null)
             return;
 
-        CharacterController controller = GetComponent<CharacterController>();
+        CharacterController controller =
+            GetComponent<CharacterController>();
 
         GameObject dropped = Instantiate(
             currentTool.PickupPrefab,
@@ -75,11 +76,32 @@ public class EquipmentManager : MonoBehaviour
             Quaternion.identity
         );
 
-        Physics.IgnoreCollision(
-            dropped.GetComponent<Collider>(),
-            controller
-        );
+        Collider droppedCollider =
+            dropped.GetComponent<Collider>();
+
+        if (droppedCollider != null && controller != null)
+        {
+            Physics.IgnoreCollision(
+                droppedCollider,
+                controller
+            );
+        }
+
+        // =====================================================
+        // DROP SOUND
+        // =====================================================
+
+        if (currentTool is Key)
+        {
+            AudioManager.Instance.PlayKeyDrop();
+        }
+        else if (currentTool is Screwdriver)
+        {
+            AudioManager.Instance.PlayScrewdriverDrop();
+        }
 
         Unequip();
     }
+    
+
 }

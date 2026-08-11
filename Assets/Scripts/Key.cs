@@ -16,9 +16,23 @@ public class Key : MonoBehaviour, ITool, IPickup
         Padlock padlock = hit.collider.GetComponentInParent<Padlock>();
 
         if (padlock != null)
+        {
             padlock.Unlock();
+        }
     }
 
-    public void OnPickedUp() {}
+    public void OnPickedUp()
+    {
+        Debug.Log("KEY PICKED UP - OnPickedUp() called");
 
+        if (AudioManager.Instance == null)
+        {
+            Debug.LogError("KEY PICKUP: AudioManager.Instance is NULL!");
+            return;
+        }
+
+        Debug.Log("KEY PICKUP: Calling PlayActionSound");
+
+        AudioManager.Instance.PlayActionSound(gameObject);
+    }
 }
