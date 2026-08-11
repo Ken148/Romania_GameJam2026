@@ -10980,20 +10980,6 @@ MonoBehaviour:
     loop: 0
     maxDistance: 50
     source: {fileID: 0}
-  boxPush:
-    soundEnabled: 1
-    clip: {fileID: 8300000, guid: 7a39391d9a77d7f48bde410a4427ade9, type: 3}
-    soundObject: {fileID: 959306516}
-    playOnStart: 0
-    startDelay: 0
-    fadeInOnStart: 0
-    startVolume: 0
-    endVolume: 0.5
-    fadeInDuration: 0
-    speed: 0.431
-    loop: 1
-    maxDistance: 50
-    source: {fileID: 0}
   waterWalk:
     soundEnabled: 1
     clip: {fileID: 0}
@@ -11002,15 +10988,29 @@ MonoBehaviour:
     startDelay: 0
     fadeInOnStart: 0
     startVolume: 0
-    endVolume: 1
+    endVolume: 0.04
     fadeInDuration: 5
     speed: 1
     loop: 0
     maxDistance: 50
     source: {fileID: 0}
+  objectWaterPush:
+    soundEnabled: 1
+    clip: {fileID: 8300000, guid: 4cb136b3585061740a6b7c17a38b0a46, type: 3}
+    soundObject: {fileID: 2038136562}
+    playOnStart: 0
+    startDelay: 0
+    fadeInOnStart: 0
+    startVolume: 0.05
+    endVolume: 0.05
+    fadeInDuration: 0
+    speed: 1
+    loop: 1
+    maxDistance: 50
+    source: {fileID: 0}
   objectSplash:
     soundEnabled: 1
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 4cb136b3585061740a6b7c17a38b0a46, type: 3}
     soundObject: {fileID: 0}
     playOnStart: 0
     startDelay: 0
@@ -13042,11 +13042,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 877516056}
   m_SourcePrefab: {fileID: 100100000, guid: 09fd826f68fbfa548b1161b5bf4e738b, type: 3}
---- !u!1 &959306516 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6886446978423551812, guid: afb7d268112bd780c93fce84cad2aec8, type: 3}
-  m_PrefabInstance: {fileID: 8824550706737240910}
-  m_PrefabAsset: {fileID: 0}
 --- !u!54 &959306518 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 9104200545943144178, guid: afb7d268112bd780c93fce84cad2aec8, type: 3}
@@ -23378,7 +23373,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.16
+      value: 7.84
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23386,7 +23381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.92
+      value: 1.96
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -29802,6 +29797,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026374265}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2038136562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2408377717826722140, guid: 6d3f4f5588f4c9b79918900458928df2, type: 3}
+  m_PrefabInstance: {fileID: 6998786665314928692}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2046398023
 PrefabInstance:
   m_ObjectHideFlags: 0

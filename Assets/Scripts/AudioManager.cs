@@ -134,9 +134,25 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Sound keyDrop;
     [SerializeField] private Sound screwdriverPickup;
     [SerializeField] private Sound screwdriverDrop;
-    [SerializeField] private Sound boxPush;
+
+    // =========================================================
+    // WATER SOUNDS
+    // =========================================================
+
+    [Header("========== WATER SOUNDS ==========")]
+
+    [Tooltip("Water sound for the HUMAN / PLAYER.")]
     [SerializeField] private Sound waterWalk;
+
+    [Tooltip("Water sound for an OBJECT / BOX being pushed through water.")]
+    [SerializeField] private Sound objectWaterPush;
+
+    [Tooltip("Splash sound for an object entering water.")]
     [SerializeField] private Sound objectSplash;
+
+    // =========================================================
+    // FLOOR 1 OTHER
+    // =========================================================
 
     [SerializeField] private Sound tenseMusic;
     [SerializeField] private Sound emergencyLightHum;
@@ -202,8 +218,13 @@ public class AudioManager : MonoBehaviour
         SetupSound(keyDrop);
         SetupSound(screwdriverPickup);
         SetupSound(screwdriverDrop);
-        SetupSound(boxPush);
+
+        // HUMAN WATER
         SetupSound(waterWalk);
+
+        // OBJECT WATER
+        SetupSound(objectWaterPush);
+
         SetupSound(objectSplash);
 
         SetupSound(tenseMusic);
@@ -240,8 +261,7 @@ public class AudioManager : MonoBehaviour
 
         SaveCurrentSoundStates();
 
-        previousDisableAllSounds =
-            disableAllSounds;
+        previousDisableAllSounds = disableAllSounds;
 
         // -----------------------------------------------------
         // IF DISABLE ALL WAS ALREADY ENABLED
@@ -273,8 +293,7 @@ public class AudioManager : MonoBehaviour
                 RestoreSavedSoundStates();
             }
 
-            previousDisableAllSounds =
-                disableAllSounds;
+            previousDisableAllSounds = disableAllSounds;
         }
     }
 
@@ -284,11 +303,9 @@ public class AudioManager : MonoBehaviour
 
     private void SaveCurrentSoundStates()
     {
-        Sound[] allSounds =
-            GetAllSounds();
+        Sound[] allSounds = GetAllSounds();
 
-        savedSoundEnabledStates =
-            new bool[allSounds.Length];
+        savedSoundEnabledStates = new bool[allSounds.Length];
 
         for (int i = 0; i < allSounds.Length; i++)
         {
@@ -299,8 +316,7 @@ public class AudioManager : MonoBehaviour
             }
             else
             {
-                savedSoundEnabledStates[i] =
-                    false;
+                savedSoundEnabledStates[i] = false;
             }
         }
     }
@@ -311,8 +327,7 @@ public class AudioManager : MonoBehaviour
 
     private void DisableAllSoundStates()
     {
-        Sound[] allSounds =
-            GetAllSounds();
+        Sound[] allSounds = GetAllSounds();
 
         foreach (Sound sound in allSounds)
         {
@@ -332,14 +347,12 @@ public class AudioManager : MonoBehaviour
         if (savedSoundEnabledStates == null)
             return;
 
-        Sound[] allSounds =
-            GetAllSounds();
+        Sound[] allSounds = GetAllSounds();
 
-        int count =
-            Mathf.Min(
-                allSounds.Length,
-                savedSoundEnabledStates.Length
-            );
+        int count = Mathf.Min(
+            allSounds.Length,
+            savedSoundEnabledStates.Length
+        );
 
         for (int i = 0; i < count; i++)
         {
@@ -357,23 +370,22 @@ public class AudioManager : MonoBehaviour
 
     private void StopAllManagedAudio()
     {
-        Sound[] allSounds =
-            GetAllSounds();
+        Sound[] allSounds = GetAllSounds();
 
         foreach (Sound sound in allSounds)
         {
-            if (sound == null)
-                continue;
-
-            if (sound.source == null)
+            if (sound == null || sound.source == null)
                 continue;
 
             sound.source.Stop();
+            sound.source.time = 0f;
             sound.source.volume = 0f;
         }
 
         if (sfxSource != null)
+        {
             sfxSource.Stop();
+        }
     }
 
     // =========================================================
@@ -388,8 +400,10 @@ public class AudioManager : MonoBehaviour
             keyDrop,
             screwdriverPickup,
             screwdriverDrop,
-            boxPush,
+
+            // WATER
             waterWalk,
+            objectWaterPush,
             objectSplash,
 
             tenseMusic,
@@ -477,30 +491,18 @@ public class AudioManager : MonoBehaviour
         // CONFIGURE SOURCE
         // -----------------------------------------------------
 
-        source.clip =
-            sound.clip;
+        source.clip = sound.clip;
+        source.pitch = sound.speed;
+        source.loop = sound.loop;
+        source.playOnAwake = false;
 
-        source.pitch =
-            sound.speed;
+        source.spatialBlend = 1f;
+        source.maxDistance = sound.maxDistance;
 
-        source.loop =
-            sound.loop;
-
-        source.playOnAwake =
-            false;
-
-        source.spatialBlend =
-            1f;
-
-        source.maxDistance =
-            sound.maxDistance;
-
-        sound.source =
-            source;
+        sound.source = source;
 
         // Always start silent.
-        source.volume =
-            0f;
+        source.volume = 0f;
 
         // -----------------------------------------------------
         // PLAY ON START
@@ -520,8 +522,7 @@ public class AudioManager : MonoBehaviour
     // PLAY ON START
     // =========================================================
 
-    private IEnumerator PlayOnStartRoutine(
-        Sound sound)
+    private IEnumerator PlayOnStartRoutine(Sound sound)
     {
         if (!CanPlaySound(sound))
             yield break;
@@ -545,9 +546,7 @@ public class AudioManager : MonoBehaviour
         else
         {
             sound.source.volume =
-                Mathf.Clamp01(
-                    sound.endVolume
-                );
+                Mathf.Clamp01(sound.endVolume);
 
             sound.source.Play();
         }
@@ -581,65 +580,47 @@ public class AudioManager : MonoBehaviour
     // FADE IN
     // =========================================================
 
-    private IEnumerator FadeInSound(
-        Sound sound)
+    private IEnumerator FadeInSound(Sound sound)
     {
         if (!CanPlaySound(sound))
             yield break;
 
-        AudioSource source =
-            sound.source;
+        AudioSource source = sound.source;
 
         float startVolume =
-            Mathf.Clamp01(
-                sound.startVolume
-            );
+            Mathf.Clamp01(sound.startVolume);
 
         float endVolume =
-            Mathf.Clamp01(
-                sound.endVolume
-            );
+            Mathf.Clamp01(sound.endVolume);
 
         startVolume =
-            Mathf.Min(
-                startVolume,
-                endVolume
-            );
+            Mathf.Min(startVolume, endVolume);
 
-        source.volume =
-            startVolume;
-
+        source.volume = startVolume;
         source.Play();
 
         if (sound.fadeInDuration <= 0f)
         {
-            source.volume =
-                endVolume;
-
+            source.volume = endVolume;
             yield break;
         }
 
         float elapsed = 0f;
 
-        while (
-            elapsed <
-            sound.fadeInDuration)
+        while (elapsed < sound.fadeInDuration)
         {
             if (!CanPlaySound(sound))
             {
                 source.Stop();
                 source.volume = 0f;
-
                 yield break;
             }
 
-            elapsed +=
-                Time.deltaTime;
+            elapsed += Time.deltaTime;
 
             float t =
                 Mathf.Clamp01(
-                    elapsed /
-                    sound.fadeInDuration
+                    elapsed / sound.fadeInDuration
                 );
 
             float currentVolume =
@@ -658,8 +639,7 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
 
-        source.volume =
-            endVolume;
+        source.volume = endVolume;
     }
 
     // =========================================================
@@ -686,17 +666,11 @@ public class AudioManager : MonoBehaviour
                 return;
             }
 
-            sfxSource.pitch =
-                sound.speed;
+            sfxSource.pitch = sound.speed;
 
             sfxSource.PlayOneShot(
                 sound.clip,
                 sound.endVolume
-            );
-
-            Debug.Log(
-                "AudioManager: Playing one-shot: " +
-                sound.clip.name
             );
 
             return;
@@ -706,40 +680,63 @@ public class AudioManager : MonoBehaviour
         // LOOP
         // =====================================================
 
+        StartLoopSound(sound);
+    }
+
+    // =========================================================
+    // START LOOP SOUND
+    // =========================================================
+
+    private void StartLoopSound(Sound sound)
+    {
+        if (!CanPlaySound(sound))
+            return;
+
         if (sound.source == null)
             return;
 
-        sound.source.pitch =
-            sound.speed;
+        AudioSource source = sound.source;
 
-        sound.source.loop =
-            true;
+        source.clip = sound.clip;
+        source.pitch = sound.speed;
+        source.loop = true;
 
-        sound.source.volume =
-            sound.endVolume;
+        // IMPORTANT:
+        // Each sound uses its OWN Inspector volume.
+        source.volume =
+            Mathf.Clamp01(sound.endVolume);
 
-        if (!sound.source.isPlaying)
+        if (!source.isPlaying)
         {
-            sound.source.Play();
+            source.time = 0f;
+            source.Play();
         }
+    }
+
+    // =========================================================
+    // STOP LOOP SOUND
+    // =========================================================
+
+    private void StopLoopSound(Sound sound)
+    {
+        if (sound == null)
+            return;
+
+        if (sound.source == null)
+            return;
+
+        AudioSource source = sound.source;
+
+        source.Stop();
+        source.time = 0f;
+        source.volume = 0f;
+        source.loop = sound.loop;
     }
 
     // =========================================================
     // GENERIC ACTION SOUND SYSTEM
     // =========================================================
 
-    /// <summary>
-    /// Call this from any gameplay script when an action happens.
-    ///
-    /// Example:
-    /// AudioManager.Instance.PlayActionSound(gameObject);
-    ///
-    /// The AudioManager searches all configured sounds and
-    /// plays the sound whose Sound Object matches the object
-    /// that called this function.
-    ///
-    /// Exact matches and parent/child relationships are supported.
-    /// </summary>
     public void PlayActionSound(GameObject actionObject)
     {
         if (actionObject == null)
@@ -751,22 +748,10 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        Debug.Log(
-            "PlayActionSound called with: " +
-            actionObject.name
-        );
-
         if (disableAllSounds)
-        {
-            Debug.LogWarning(
-                "AudioManager: ALL SOUNDS ARE DISABLED."
-            );
-
             return;
-        }
 
-        Sound[] allSounds =
-            GetAllSounds();
+        Sound[] allSounds = GetAllSounds();
 
         foreach (Sound sound in allSounds)
         {
@@ -779,66 +764,26 @@ public class AudioManager : MonoBehaviour
             if (!sound.soundEnabled)
                 continue;
 
-            Debug.Log(
-                "Checking: " +
-                sound.soundObject.name +
-                " | Clip: " +
-                (sound.clip != null
-                    ? sound.clip.name
-                    : "NULL") +
-                " | Enabled: " +
-                sound.soundEnabled
-            );
+            if (sound.clip == null)
+                continue;
 
-            // -------------------------------------------------
-            // EXACT MATCH
-            // -------------------------------------------------
+            bool exactMatch =
+                sound.soundObject == actionObject;
 
-            if (sound.soundObject == actionObject ||
-                actionObject.transform.IsChildOf(sound.soundObject.transform) ||
-                sound.soundObject.transform.IsChildOf(actionObject.transform))
-            {
-                Debug.Log(
-                    "MATCH FOUND! Playing: " +
-                    sound.clip.name
+            bool actionIsChild =
+                actionObject.transform.IsChildOf(
+                    sound.soundObject.transform
                 );
 
-                PlaySound(sound);
-                return;
-            }
-
-            // -------------------------------------------------
-            // ACTION OBJECT IS A CHILD
-            // -------------------------------------------------
-
-            if (actionObject.transform.IsChildOf(
-                sound.soundObject.transform))
-            {
-                Debug.Log(
-                    "PARENT MATCH FOUND! Playing: " +
-                    (sound.clip != null
-                        ? sound.clip.name
-                        : "NULL")
+            bool configuredObjectIsChild =
+                sound.soundObject.transform.IsChildOf(
+                    actionObject.transform
                 );
 
-                PlaySound(sound);
-                return;
-            }
-
-            // -------------------------------------------------
-            // CONFIGURED OBJECT IS A CHILD
-            // -------------------------------------------------
-
-            if (sound.soundObject.transform.IsChildOf(
-                actionObject.transform))
+            if (exactMatch ||
+                actionIsChild ||
+                configuredObjectIsChild)
             {
-                Debug.Log(
-                    "CHILD MATCH FOUND! Playing: " +
-                    (sound.clip != null
-                        ? sound.clip.name
-                        : "NULL")
-                );
-
                 PlaySound(sound);
                 return;
             }
@@ -862,36 +807,20 @@ public class AudioManager : MonoBehaviour
             return;
 
         GameObject audioObject =
-            new GameObject(
-                "3D_Audio"
-            );
+            new GameObject("3D_Audio");
 
-        audioObject.transform.position =
-            position;
+        audioObject.transform.position = position;
 
         AudioSource source =
             audioObject.AddComponent<AudioSource>();
 
-        source.clip =
-            sound.clip;
-
-        source.volume =
-            sound.endVolume;
-
-        source.pitch =
-            sound.speed;
-
-        source.spatialBlend =
-            1f;
-
-        source.maxDistance =
-            sound.maxDistance;
-
-        source.playOnAwake =
-            false;
-
-        source.loop =
-            sound.loop;
+        source.clip = sound.clip;
+        source.volume = sound.endVolume;
+        source.pitch = sound.speed;
+        source.spatialBlend = 1f;
+        source.maxDistance = sound.maxDistance;
+        source.playOnAwake = false;
+        source.loop = sound.loop;
 
         source.Play();
 
@@ -901,9 +830,7 @@ public class AudioManager : MonoBehaviour
                 sound.clip.length /
                 Mathf.Max(
                     0.01f,
-                    Mathf.Abs(
-                        sound.speed
-                    )
+                    Mathf.Abs(sound.speed)
                 );
 
             Destroy(
@@ -917,48 +844,18 @@ public class AudioManager : MonoBehaviour
     // LOOPING SOUNDS
     // =========================================================
 
-    private void PlayLoop(
-        Sound sound)
+    private void PlayLoop(Sound sound)
     {
-        if (!CanPlaySound(sound))
-            return;
-
-        if (sound.source == null)
-            return;
-
-        sound.source.pitch =
-            sound.speed;
-
-        sound.source.volume =
-            sound.endVolume;
-
-        sound.source.loop =
-            true;
-
-        if (!sound.source.isPlaying)
-        {
-            sound.source.Play();
-        }
+        StartLoopSound(sound);
     }
 
     // =========================================================
     // STOP
     // =========================================================
 
-    private void StopSound(
-        Sound sound)
+    private void StopSound(Sound sound)
     {
-        if (sound == null ||
-            sound.source == null)
-            return;
-
-        sound.source.Stop();
-
-        sound.source.loop =
-            sound.loop;
-
-        sound.source.volume =
-            0f;
+        StopLoopSound(sound);
     }
 
     // =========================================================
@@ -977,14 +874,47 @@ public class AudioManager : MonoBehaviour
     public void PlayScrewdriverDrop()
         => PlaySound(screwdriverDrop);
 
-    public void PlayBoxPush()
-        => PlaySound(boxPush);
+    // =========================================================
+    // HUMAN / PLAYER WATER
+    // =========================================================
 
     public void PlayWaterWalk()
         => PlaySound(waterWalk);
 
+    public void StartWaterWalk()
+    {
+        StartLoopSound(waterWalk);
+    }
+
+    public void StopWaterWalk()
+    {
+        StopLoopSound(waterWalk);
+    }
+
+    // =========================================================
+    // OBJECT / BOX WATER
+    // =========================================================
+
+    public void StartObjectWaterPush()
+    {
+        StartLoopSound(objectWaterPush);
+    }
+
+    public void StopObjectWaterPush()
+    {
+        StopLoopSound(objectWaterPush);
+    }
+
+    // =========================================================
+    // OBJECT SPLASH
+    // =========================================================
+
     public void PlayObjectSplash()
         => PlaySound(objectSplash);
+
+    // =========================================================
+    // OTHER FLOOR 1 SOUNDS
+    // =========================================================
 
     public void PlaySlidingDoorOpen()
         => PlaySound(slidingDoorOpen);
@@ -1003,12 +933,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayFloor2DoorOpen()
         => PlaySound(floor2DoorOpen);
-
-    public void StartBoxPush()
-        => PlayLoop(boxPush);
-
-    public void StopBoxPush()
-        => StopSound(boxPush);
 
     // =========================================================
     // FLOOR 2
@@ -1077,16 +1001,12 @@ public class AudioManager : MonoBehaviour
 
     public void StartEmergencyLightHum()
     {
-        PlayLoop(
-            emergencyLightHum
-        );
+        PlayLoop(emergencyLightHum);
     }
 
     public void StopEmergencyLightHum()
     {
-        StopSound(
-            emergencyLightHum
-        );
+        StopSound(emergencyLightHum);
     }
 
     // =========================================================

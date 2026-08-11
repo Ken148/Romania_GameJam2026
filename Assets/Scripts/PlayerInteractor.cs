@@ -90,21 +90,31 @@ public class PlayerInteractor : MonoBehaviour
     {
         isPushing = false;
 
-        if (!interactAction.IsPressed())
+        Pushable pushable =
+            hit.collider.GetComponentInParent<Pushable>();
+
+        // Not looking at a pushable object.
+        if (pushable == null)
             return;
-        
-        Pushable pushable = hit.collider.GetComponentInParent<Pushable>();
-        if (pushable != null)
+
+        // E is NOT being held.
+        // Make sure the sound and pushing stop.
+        if (!interactAction.IsPressed())
         {
-            isPushing = true;
-
-            Vector3 direction = transform.forward;
-
-            pushable.Push(GetCardinalDirection(direction));
+            pushable.StopPush();
+            return;
         }
 
-        
+        // E IS being held.
+        isPushing = true;
+
+        Vector3 direction = transform.forward;
+
+        pushable.Push(
+            GetCardinalDirection(direction)
+        );
     }
+
 
     private void HandlePadlockedDoor(RaycastHit hit)
     {

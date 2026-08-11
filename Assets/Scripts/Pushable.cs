@@ -20,8 +20,10 @@ public class Pushable : MonoBehaviour
 
         if (!isBeingPushed)
         {
-            AudioManager.Instance.StartBoxPush();
             isBeingPushed = true;
+
+            // Start ONLY the object/box water sound.
+            AudioManager.Instance.StartObjectWaterPush();
         }
     }
 
@@ -29,7 +31,12 @@ public class Pushable : MonoBehaviour
     {
         rb.linearVelocity = Vector3.zero;
 
-        AudioManager.Instance.StopBoxPush();
-        isBeingPushed = false;
+        if (isBeingPushed)
+        {
+            isBeingPushed = false;
+
+            // Stop ONLY the object/box water sound.
+            AudioManager.Instance.StopObjectWaterPush();
+        }
     }
 }

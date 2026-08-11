@@ -111,6 +111,16 @@ public class FirstPersonMovement : MonoBehaviour
         velocity.y = verticalSpeed;
 
         controller.Move(velocity * Time.deltaTime);
+
+        if (controller.isGrounded &&
+        horizontalVelocity.sqrMagnitude > 0.01f)
+        {
+            AudioManager.Instance.PlayWaterWalk();
+        }
+        else
+        {
+            AudioManager.Instance.PlayWaterWalk();
+        }
     }
 
     private void UpdateCrouch(bool crouching)
