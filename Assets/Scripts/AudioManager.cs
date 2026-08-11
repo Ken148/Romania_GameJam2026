@@ -48,6 +48,10 @@ public class AudioManager : MonoBehaviour
         )]
         public GameObject soundObject;
 
+        // =====================================================
+        // PLAY ON START
+        // =====================================================
+
         [Header("Play On Start")]
 
         [Tooltip(
@@ -60,6 +64,23 @@ public class AudioManager : MonoBehaviour
         )]
         [Min(0f)]
         public float startDelay = 0f;
+
+        // =====================================================
+        // ACTION DELAY
+        // =====================================================
+
+        [Header("Action Delay")]
+
+        [Tooltip(
+            "If this sound is triggered by another script, " +
+            "wait this many seconds before playing it."
+        )]
+        [Min(0f)]
+        public float actionDelay = 0f;
+
+        // =====================================================
+        // FADE IN
+        // =====================================================
 
         [Header("Fade In")]
 
@@ -86,6 +107,10 @@ public class AudioManager : MonoBehaviour
         [Min(0f)]
         public float fadeInDuration = 5f;
 
+        // =====================================================
+        // SETTINGS
+        // =====================================================
+
         [Header("Settings")]
 
         [Tooltip(
@@ -94,12 +119,20 @@ public class AudioManager : MonoBehaviour
         [Range(0.1f, 3f)]
         public float speed = 1f;
 
+        // =====================================================
+        // LOOP
+        // =====================================================
+
         [Header("Loop")]
 
         [Tooltip(
             "If enabled, this sound will continuously loop when played."
         )]
         public bool loop = false;
+
+        // =====================================================
+        // 3D SOUND
+        // =====================================================
 
         [Header("3D Sound")]
 
@@ -501,14 +534,8 @@ public class AudioManager : MonoBehaviour
         // =====================================================
 
         source.spatialBlend = 1f;
-
-        // Linear distance falloff.
         source.rolloffMode = AudioRolloffMode.Linear;
-
-        // Distance at which the sound is at full volume.
         source.minDistance = 1f;
-
-        // Distance at which the sound becomes silent.
         source.maxDistance = sound.maxDistance;
 
         sound.source = source;
@@ -562,6 +589,28 @@ public class AudioManager : MonoBehaviour
 
             sound.source.Play();
         }
+    }
+
+    // =========================================================
+    // ACTION DELAY ROUTINE
+    // =========================================================
+
+    private IEnumerator DelayedPlaySound(Sound sound)
+    {
+        if (!CanPlaySound(sound))
+            yield break;
+
+        if (sound.actionDelay > 0f)
+        {
+            yield return new WaitForSeconds(
+                sound.actionDelay
+            );
+        }
+
+        if (!CanPlaySound(sound))
+            yield break;
+
+        PlaySoundImmediate(sound);
     }
 
     // =========================================================
@@ -663,6 +712,29 @@ public class AudioManager : MonoBehaviour
         if (!CanPlaySound(sound))
             return;
 
+        // If this sound has an Action Delay,
+        // wait before playing it.
+        if (sound.actionDelay > 0f)
+        {
+            StartCoroutine(
+                DelayedPlaySound(sound)
+            );
+
+            return;
+        }
+
+        PlaySoundImmediate(sound);
+    }
+
+    // =========================================================
+    // PLAY SOUND IMMEDIATELY
+    // =========================================================
+
+    private void PlaySoundImmediate(Sound sound)
+    {
+        if (!CanPlaySound(sound))
+            return;
+
         // =====================================================
         // ONE SHOT
         // =====================================================
@@ -713,14 +785,10 @@ public class AudioManager : MonoBehaviour
         source.pitch = sound.speed;
         source.loop = true;
 
-        // IMPORTANT:
-        // Each sound uses its OWN Inspector volume.
         source.volume =
             Mathf.Clamp01(sound.endVolume);
 
-        // IMPORTANT:
-        // Re-apply 3D settings in case another script changed
-        // the AudioSource.
+        // Re-apply 3D settings.
         source.spatialBlend = 1f;
         source.rolloffMode = AudioRolloffMode.Linear;
         source.minDistance = 1f;
