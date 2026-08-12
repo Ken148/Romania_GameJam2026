@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float interactDistance = 1f;
-    
+
     private PlayerInput playerInput;
     private InputAction interactAction;
     private InputAction dropAction;
@@ -17,8 +17,6 @@ public class PlayerInteractor : MonoBehaviour
 
     private bool isPushing;
     public bool IsPushing => isPushing;
-
-
 
     private void Awake()
     {
@@ -44,11 +42,13 @@ public class PlayerInteractor : MonoBehaviour
             Debug.LogError("PlayerInput not found in parent.", this);
             return false;
         }
+
         if (equipmentManager == null)
         {
             Debug.LogError("EquipmentManager not found in parent.", this);
             return false;
         }
+
         if (movement == null)
         {
             Debug.LogError("FirstPersonMovement not found in parent.", this);
@@ -64,13 +64,13 @@ public class PlayerInteractor : MonoBehaviour
 
         if (!TryGetHit(out RaycastHit hit))
         {
-            //Debug.Log("Hit miss");
             return;
         }
 
         Debug.Log(hit.collider.name);
 
         if (HandleToolUse(hit)) return;
+
         HandlePickup(hit);
         HandlePush(hit);
         HandlePadlockedDoor(hit);
@@ -78,6 +78,7 @@ public class PlayerInteractor : MonoBehaviour
         HandleBrokenFuse(hit);
         HandlePuzzlePlate(hit);
         HandleBoat(hit);
+        HandleJournal(hit);
     }
 
     private void HandleDrop()
@@ -115,13 +116,14 @@ public class PlayerInteractor : MonoBehaviour
         );
     }
 
-
     private void HandlePadlockedDoor(RaycastHit hit)
     {
         if (!interactAction.IsPressed())
             return;
-        
-        PadlockedDoor door = hit.collider.GetComponentInParent<PadlockedDoor>();
+
+        PadlockedDoor door =
+            hit.collider.GetComponentInParent<PadlockedDoor>();
+
         if (door != null)
         {
             door.Open();
@@ -133,8 +135,11 @@ public class PlayerInteractor : MonoBehaviour
         if (!interactAction.WasPressedThisFrame())
             return;
 
-        SceneDoor door = hit.collider.GetComponentInParent<SceneDoor>();
-        if (door != null){
+        SceneDoor door =
+            hit.collider.GetComponentInParent<SceneDoor>();
+
+        if (door != null)
+        {
             door.Enter();
             Debug.Log("Switching scenes");
         }
@@ -145,8 +150,11 @@ public class PlayerInteractor : MonoBehaviour
         if (!interactAction.WasPressedThisFrame())
             return;
 
-        BrokenFuse brokenFuse = hit.collider.GetComponentInParent<BrokenFuse>();
-        if (brokenFuse != null){
+        BrokenFuse brokenFuse =
+            hit.collider.GetComponentInParent<BrokenFuse>();
+
+        if (brokenFuse != null)
+        {
             brokenFuse.removeFuse();
             Debug.Log("Removing broken fuse");
         }
@@ -162,10 +170,10 @@ public class PlayerInteractor : MonoBehaviour
         return new Vector3(0, 0, Mathf.Sign(direction.z));
     }
 
-
     private bool HandleToolUse(RaycastHit hit)
     {
         ITool tool = equipmentManager.CurrentTool;
+
         if (tool == null)
             return false;
 
@@ -174,8 +182,8 @@ public class PlayerInteractor : MonoBehaviour
             tool.Use(hit);
             return true;
         }
+
         return false;
-            
     }
 
     private bool IsToolActivated(ITool tool)
@@ -198,7 +206,9 @@ public class PlayerInteractor : MonoBehaviour
         if (!interactAction.WasPressedThisFrame())
             return;
 
-        IPickup pickup = hit.collider.GetComponentInParent<IPickup>();
+        IPickup pickup =
+            hit.collider.GetComponentInParent<IPickup>();
+
         if (pickup != null)
             equipmentManager.Equip(pickup);
     }
@@ -208,9 +218,41 @@ public class PlayerInteractor : MonoBehaviour
         if (!interactAction.WasPressedThisFrame())
             return;
 
-        PuzzlePlate plate = hit.collider.GetComponentInParent<PuzzlePlate>();
+        PuzzlePlate plate =
+            hit.collider.GetComponentInParent<PuzzlePlate>();
+
         if (plate != null)
             plate.Interact();
+    }
+
+    private void HandleBoat(RaycastHit hit)
+    {
+        if (!interactAction.WasPressedThisFrame())
+            return;
+
+        Boat boat =
+            hit.collider.GetComponentInParent<Boat>();
+
+        if (boat != null)
+            boat.Interact();
+    }
+
+    // =========================
+    // JOURNAL
+    // =========================
+
+    private void HandleJournal(RaycastHit hit)
+    {
+        if (!interactAction.WasPressedThisFrame())
+            return;
+
+        Journal journal =
+            hit.collider.GetComponentInParent<Journal>();
+
+        if (journal != null)
+        {
+            journal.OpenLetter();
+        }
     }
 
     private bool TryGetHit(out RaycastHit hit)
@@ -223,17 +265,4 @@ public class PlayerInteractor : MonoBehaviour
             interactMask
         );
     }
-
-    private void HandleBoat(RaycastHit hit)
-    {
-        if (!interactAction.WasPressedThisFrame())
-            return;
-
-        Boat boat = hit.collider.GetComponentInParent<Boat>();
-        if (boat != null)
-            boat.Interact();
-    }
-
-    
-    
 }
