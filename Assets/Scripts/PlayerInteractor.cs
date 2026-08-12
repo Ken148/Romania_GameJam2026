@@ -78,7 +78,9 @@ public class PlayerInteractor : MonoBehaviour
         HandleBrokenFuse(hit);
         HandlePuzzlePlate(hit);
         HandleBoat(hit);
-        HandleJournal(hit);
+
+        // Notes / Journals
+        HandleReadable(hit);
     }
 
     private void HandleDrop()
@@ -94,19 +96,15 @@ public class PlayerInteractor : MonoBehaviour
         Pushable pushable =
             hit.collider.GetComponentInParent<Pushable>();
 
-        // Not looking at a pushable object.
         if (pushable == null)
             return;
 
-        // E is NOT being held.
-        // Make sure the sound and pushing stop.
         if (!interactAction.IsPressed())
         {
             pushable.StopPush();
             return;
         }
 
-        // E IS being held.
         isPushing = true;
 
         Vector3 direction = transform.forward;
@@ -238,21 +236,37 @@ public class PlayerInteractor : MonoBehaviour
     }
 
     // =========================
-    // JOURNAL
+    // READABLES
     // =========================
 
-    private void HandleJournal(RaycastHit hit)
+    private void HandleReadable(RaycastHit hit)
     {
         if (!interactAction.WasPressedThisFrame())
             return;
 
+        // Normal Journal
         Journal journal =
             hit.collider.GetComponentInParent<Journal>();
 
         if (journal != null)
         {
             journal.OpenLetter();
+            Debug.Log("Opened Journal: " + journal.gameObject.name);
+            return;
         }
+
+        // Note 1
+        Note1 note1 =
+            hit.collider.GetComponentInParent<Note1>();
+
+        if (note1 != null)
+        {
+            note1.OpenLetter();
+            Debug.Log("Opened Note1: " + note1.gameObject.name);
+            return;
+        }
+
+        // Add more readable types here if needed.
     }
 
     private bool TryGetHit(out RaycastHit hit)

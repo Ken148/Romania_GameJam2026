@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class Journal : MonoBehaviour
+public class Note1 : MonoBehaviour
 {
     [Header("Journal UI")]
     public GameObject journalUI;
