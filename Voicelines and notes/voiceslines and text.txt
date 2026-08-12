@@ -1,7 +1,7 @@
 Floor 1:
 --------------------journal--------------------------
 
-(Page 1)
+May 3
 
 Mihai Petrescu
 Marine Systems Technician
@@ -13,23 +13,27 @@ When I first accepted this contract, I thought I would only be away from home fo
 
 The ocean always sounds easier from the shore.
 
+May 11
+
 Working on cargo ships is different. Every day there is something new breaking. Pumps fail, generators need repairs, pipes leak. The ship is like a living thing. If you ignore one small problem, eventually it becomes a much bigger one.
 
 The crew has been good to me. Long hours, bad coffee, and too many arguments about football, but they are good people.
 
-
-
-(Page 2)
+May 19
 
 The last few weeks have been strange.
 
 The captain ordered extra inspections after several failures in the lower decks. Some systems are older than they should be, and replacement parts are becoming harder to find.
+
+May 26
 
 I have been spending most of my time below deck repairing electrical systems and checking the emergency equipment.
 
 Something about this voyage feels wrong.
 
 Maybe it is just exhaustion.
+
+May 29
 
 Tomorrow we continue through rough waters. I need to finish checking the lower compartments before my next shift.
 
