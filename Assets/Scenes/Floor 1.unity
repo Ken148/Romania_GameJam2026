@@ -12429,6 +12429,21 @@ MonoBehaviour:
     loop: 0
     maxDistance: 50
     source: {fileID: 0}
+  voiceLine:
+    soundEnabled: 1
+    clip: {fileID: 8300000, guid: 0c6dcd7656a84b14aafeb31d93229623, type: 3}
+    soundObject: {fileID: 244698036}
+    playOnStart: 1
+    startDelay: 0.5
+    actionDelay: 0
+    fadeInOnStart: 1
+    startVolume: 0.2
+    endVolume: 0.2
+    fadeInDuration: 3
+    speed: 1
+    loop: 0
+    maxDistance: 50
+    source: {fileID: 0}
 --- !u!1001 &769119614
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25276,7 +25291,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.84
+      value: 2.508
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalPosition.y
@@ -25284,23 +25299,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.96
+      value: 0.484
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.5107157
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.8597497
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -25308,7 +25323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 241.423
       objectReference: {fileID: 0}
     - target: {fileID: 1407136454062112976, guid: b74af2269535b67688e72148190604cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

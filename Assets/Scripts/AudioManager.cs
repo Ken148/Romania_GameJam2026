@@ -228,6 +228,17 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private Sound sea;
 
     // =========================================================
+    // VOICE LINES
+    // =========================================================
+
+    [Header("========== VOICE LINES ==========")]
+
+    [Tooltip(
+        "Voice line audio. Uses the same settings as every other Sound."
+    )]
+    [SerializeField] private Sound voiceLine;
+
+    // =========================================================
     // AWAKE
     // =========================================================
 
@@ -287,6 +298,9 @@ public class AudioManager : MonoBehaviour
 
         SetupSound(endingMusic);
         SetupSound(sea);
+
+        // VOICE LINE
+        SetupSound(voiceLine);
 
         // -----------------------------------------------------
         // SAVE INITIAL SETTINGS
@@ -465,7 +479,10 @@ public class AudioManager : MonoBehaviour
             click,
 
             endingMusic,
-            sea
+            sea,
+
+            // VOICE LINE
+            voiceLine
         };
     }
 
@@ -1104,6 +1121,13 @@ public class AudioManager : MonoBehaviour
     {
         StopSound(emergencyLightHum);
     }
+
+    // =========================================================
+    // VOICE LINE
+    // =========================================================
+
+    public void PlayVoiceLine()
+        => PlaySound(voiceLine);
 
     // =========================================================
     // SEA
